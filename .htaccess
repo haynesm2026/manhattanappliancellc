@@ -1,0 +1,16 @@
+DirectoryIndex index.php
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^services/?$ services.php [L]
+RewriteRule ^clients/?$ clients.php [L]
+RewriteRule ^service-areas/?$ service-areas.php [L]
+RewriteRule ^why-manhattan-appliance/?$ why-manhattan-appliance.php [L]
+RewriteRule ^resources/?$ resources.php [L]
+RewriteRule ^contact/?$ contact.php [L]
+RewriteRule ^brands-we-service/?$ brands-we-service.php [L]
+RewriteRule ^faqs/?$ faqs.php [L]

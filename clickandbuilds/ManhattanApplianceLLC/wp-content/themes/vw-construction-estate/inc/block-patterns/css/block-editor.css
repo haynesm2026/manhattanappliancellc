@@ -1,0 +1,103 @@
+/*sliderbox css*/
+.sliderbox h1, .contactbox h2{
+  font-family: 'Source Sans Pro', sans-serif !important;
+  letter-spacing: 1px;
+}
+.sliderbox p.block-editor-rich-text__editable.text-right.block-editor-block-list__block.wp-block,.contactbox p.block-editor-rich-text__editable.block-editor-block-list__block.wp-block, .sliderbox .block-editor-rich-text__editable.wp-block-button__link,.contactbox .block-editor-rich-text__editable.wp-block-button__link,.main-about .block-editor-rich-text__editable.wp-block-button__link,.main-about .block-editor-rich-text__editable.block-editor-block-list__block.wp-block.main-about .block-editor-rich-text__editable.block-editor-block-list__block.wp-block,.main-about .block-editor-rich-text__editable.block-editor-block-list__block.wp-block{
+  font-family: 'Source Sans Pro', sans-serif !important;
+}
+.sliderbox .block-editor-block-list__block, .contact-content-col .block-editor-block-list__block, .main-about .block-editor-block-list__block{
+  margin-top: 10px !important;
+  margin-bottom: 10px !important
+}
+.sliderbox .block-editor-rich-text__editable.wp-block-button__link{
+	padding: 10px 25px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #fff;
+  border: 2px solid;
+  text-decoration: none;
+  letter-spacing: 1px;
+  background: transparent;
+}
+.sliderbox .block-editor-rich-text__editable.wp-block-button__link:hover,.main-about .block-editor-rich-text__editable.wp-block-button__link:hover{
+  background: #f68121;
+  border: 2px solid #f68021;
+}
+.sliderbox-content.block-editor-block-list__block.wp-block{
+  flex-basis: 52% !important;
+}
+.sliderbox .block-editor-block-list__block{
+  margin-top: 10px !important;
+  margin-bottom: 10px !important
+}
+.contactbox .block-editor-block-list__block{
+  margin-top: 5px !important;
+  margin-bottom: 5px !important
+}
+.contact-content-col .wp-block-column.block-editor-block-list__block.wp-block{
+  margin-left: 5%;
+}
+.contactbox .wp-block-columns.callbox.block-editor-block-list__block.wp-block{
+  margin: 13% 0 5% 8% !important;
+}
+.callbox p.block-editor-rich-text__editable.block-editor-block-list__block.wp-block{
+  font-size: 26px !important;
+}
+.sliderbox h1{
+  letter-spacing: 1px;
+  text-align: right;
+  border-right: 2px solid #f68021;
+  padding: 0px 20px;
+}
+/*contact section*/
+.callbox .wp-block-image img{
+  width: auto !important;
+}
+.contactbox a.wp-block-button__link:after {
+  content: '\f061';
+  font-size: 15px;
+  position: relative;
+  left: 5px;
+  color: #fff;
+  top: 1px;
+  font-weight: 900;
+  font-family: 'Font Awesome 5 Free';
+}
+.contactbox .wp-block-cover.aligncenter.has-background-dim.px-lg-5{
+  height: auto !important;
+}
+.contactbox .wp-block-button__link {
+  padding: 10px 25px !important;
+}
+.contactbox .block-editor-rich-text__editable.wp-block-button__link,.main-about .block-editor-rich-text__editable.wp-block-button__link{
+  background: #0a003f;
+  padding: 8px 20px !important;
+  font-size: 15px;
+  border: 2px solid #0a003f;
+}
+.contactbox .block-editor-rich-text__editable.wp-block-button__link:after {
+  content: '\f061';
+  font-size: 15px;
+  position: relative;
+  left: 5px;
+  color: #fff;
+  top: 1px;
+  font-weight: 900;
+  font-family: 'Font Awesome 5 Free';
+}
+.contactbox .block-editor-rich-text__editable.wp-block-button__link:hover{
+  border: 2px solid #0a003f !important;
+  background: transparent;
+}
+.contactbox .wp-block-button.block-editor-block-list__block.wp-block:hover .block-editor-rich-text__editable.wp-block-button__link, .contactbox .wp-block-button.block-editor-block-list__block.wp-block:hover .block-editor-rich-text__editable.wp-block-button__link:after{
+  color: #0a003f !important;
+}
+.wp-block-columns.contactbox.block-editor-block-list__block{
+  margin-top: -39px !important;
+}
+/*ABOUT SECTION*/
+.main-about-content h3{
+  border-left: 4px solid #f68121;
+  padding: 0px 15px !important;
+}

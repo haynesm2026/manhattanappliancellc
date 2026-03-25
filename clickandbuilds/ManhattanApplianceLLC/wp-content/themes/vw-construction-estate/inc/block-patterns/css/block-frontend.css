@@ -1,0 +1,109 @@
+/*sliderbox css*/
+.sliderbox{
+  width: auto;
+  height: auto;
+}
+.sliderbox .wp-block-buttons, .main-about-img .alignright{
+  border: none !important;
+}
+.sliderbox a.wp-block-button__link{
+	padding: 8px 25px;
+  border: 2px solid #fff;
+  letter-spacing: 1px;
+  background: transparent;
+}
+.sliderbox a.wp-block-button__link:hover{
+	border: 2px solid #f68021;
+}
+.sliderbox h1{
+  letter-spacing: 1px;
+  text-align: right;
+  border-right: 2px solid #f68021;
+  padding: 0px 20px;
+}
+/*contact section*/
+.call-text-call p{
+  font-size: 26px !important;
+}
+.callbox .wp-block-image img, .main-about .wp-block-image img{
+  width: auto !important;
+}
+.contactbox a.wp-block-button__link:after {
+  content: '\f061';
+  font-size: 15px;
+  position: relative;
+  left: 5px;
+  color: #fff;
+  top: 1px;
+  font-weight: 900;
+  font-family: 'Font Awesome 5 Free';
+}
+.contactbox .wp-block-cover.aligncenter.has-background-dim.px-lg-5{
+  height: auto !important;
+}
+.contactbox .wp-block-button__link {
+  padding: 10px 25px !important;
+}
+.contactbox .wp-block-button:hover{
+  border: 2px solid #0a003f;
+}
+.contactbox .wp-block-button:hover a.wp-block-button__link, .contactbox .wp-block-button:hover a.wp-block-button__link:after{
+  color: #0a003f !important;
+}
+/*ABOUT SECTION*/
+.main-about-content h3{
+  border-left: 4px solid #f68121;
+  padding: 0px 15px !important;
+}
+.main-about-content a.wp-block-button__link{
+  padding: 8px 25px;
+}
+/*Responsive css*/
+@media screen and (max-width: 991px) and (min-width: 767px){
+  .contactbox{
+    flex-wrap: nowrap;
+  }
+  .contactbox .wp-block-column:nth-child(2n){
+    margin-left: 0 !important;
+  }
+  .call-box-col.mx-lg-5{
+    flex-basis: 30% !important;
+  }
+  .wp-block-column.contact-content-col {
+    flex-basis: 70% !important;
+  }
+  .call-text-call{
+    flex-basis: 85% !important;
+  }
+  .call-text-call p, .contact-content-col h2{
+    font-size: 20px !important;
+  }
+  .contact-content-col p{
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+  .sliderbox .sliderbox-content {
+    flex-basis: 82.66% !important;
+  }
+  .main-about h3{
+    font-size: 27px !important;
+  }
+}
+@media screen and (max-width: 720px) {
+  .main-about{
+    margin: 20px !important;
+  }
+  .sliderbox p{
+    display: none;
+  }
+  .sliderbox h1{
+    font-size: 30px !important;
+  }
+  .call-text-call p, .phone-col figure{
+    text-align: center !important;
+  }
+}
+@media screen and (max-width: 1024px) and (min-width: 991px){
+.wp-block-column.is-vertically-aligned-top.phone-col{
+  flex-basis: 65% !important;
+}
