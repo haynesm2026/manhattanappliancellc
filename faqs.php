@@ -22,20 +22,20 @@ $items = [
 
 render_header($page, $site, $navItems);
 ?>
-<section class="page-hero">
-    <div class="wrap narrow">
-        <p class="eyebrow">FAQs</p>
-        <h1>Common appliance repair questions, answered.</h1>
-        <p class="lede">Quick guidance on scheduling, maintenance, repair value, and what to expect from our team.</p>
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">FAQs</p>
+        <h1 class="mb-5 text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">Common appliance repair questions, answered.</h1>
+        <p class="text-lg leading-8 text-slate-600">Quick guidance on scheduling, maintenance, repair value, and what to expect from our team.</p>
     </div>
 </section>
 
-<section class="section">
-    <div class="wrap prose">
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl rounded-[24px] border border-brand-line bg-white p-8 shadow-panel">
         <?php foreach ($items as $item): ?>
-            <div class="faq-item">
-                <h2><?= htmlspecialchars($item['q']) ?></h2>
-                <p><?= htmlspecialchars($item['a']) ?></p>
+            <div class="border-t border-brand-line py-6 first:border-t-0 first:pt-0">
+                <h2 class="mb-2 text-2xl font-semibold tracking-tight text-brand-ink"><?= htmlspecialchars($item['q']) ?></h2>
+                <p class="text-lg leading-8 text-slate-600"><?= htmlspecialchars($item['a']) ?></p>
             </div>
         <?php endforeach; ?>
     </div>

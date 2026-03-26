@@ -20,22 +20,22 @@ $values = [
 
 render_header($page, $site, $navItems);
 ?>
-<section class="page-hero">
-    <div class="wrap narrow">
-        <p class="eyebrow">Why Manhattan Appliance</p>
-        <h1>Service built on integrity, accountability, and technical depth.</h1>
-        <p class="lede">We work with the urgency, care, and professionalism customers expect when a key appliance fails.</p>
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Why Manhattan Appliance</p>
+        <h1 class="mb-5 text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">Service built on integrity, accountability, and technical depth.</h1>
+        <p class="text-lg leading-8 text-slate-600">We work with the urgency, care, and professionalism customers expect when a key appliance fails.</p>
     </div>
 </section>
 
-<section class="section">
-    <div class="wrap two-column align-start">
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_1fr]">
         <div>
-            <img class="feature-image" src="<?= asset_url('assets/images/why-manhattan.jpg') ?>" alt="Appliance technician at work">
+            <img class="aspect-[4/3] w-full rounded-[24px] object-cover shadow-panel" src="<?= asset_url('assets/images/why-manhattan.jpg') ?>" alt="Appliance technician at work">
         </div>
         <div>
-            <h2>What Sets Us Apart</h2>
-            <ul class="plain-list">
+            <h2 class="mb-4 text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">What Sets Us Apart</h2>
+            <ul class="space-y-3 pl-5 text-lg leading-8 text-slate-600 marker:text-brand-blue">
                 <?php foreach ($values as $value): ?>
                     <li><?= htmlspecialchars($value) ?></li>
                 <?php endforeach; ?>
@@ -44,27 +44,27 @@ render_header($page, $site, $navItems);
     </div>
 </section>
 
-<section class="section section-alt">
-    <div class="wrap card-grid three-up">
-        <article class="icon-card">
-            <h2>Family-Owned & Operated</h2>
-            <p>We treat every customer like family and every property with care.</p>
+<section class="border-y border-brand-line bg-brand-soft/50 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
+        <article class="rounded-[24px] border border-brand-line bg-white p-8 shadow-panel">
+            <h2 class="mb-3 text-2xl font-semibold tracking-tight text-brand-ink">Family-Owned & Operated</h2>
+            <p class="text-lg leading-8 text-slate-600">We treat every customer like family and every property with care.</p>
         </article>
-        <article class="icon-card">
-            <h2>Licensed & Fully Insured</h2>
-            <p>Full licensing and insurance coverage protects you and your property throughout the job.</p>
+        <article class="rounded-[24px] border border-brand-line bg-white p-8 shadow-panel">
+            <h2 class="mb-3 text-2xl font-semibold tracking-tight text-brand-ink">Licensed & Fully Insured</h2>
+            <p class="text-lg leading-8 text-slate-600">Full licensing and insurance coverage protects you and your property throughout the job.</p>
         </article>
-        <article class="icon-card">
-            <h2>Factory Certifications</h2>
-            <p>BlueStar and GE certifications reflect specialized training and manufacturer-standard work.</p>
+        <article class="rounded-[24px] border border-brand-line bg-white p-8 shadow-panel">
+            <h2 class="mb-3 text-2xl font-semibold tracking-tight text-brand-ink">Factory Certifications</h2>
+            <p class="text-lg leading-8 text-slate-600">BlueStar and GE certifications reflect specialized training and manufacturer-standard work.</p>
         </article>
     </div>
 </section>
 
-<section class="section">
-    <div class="wrap prose">
-        <h2>Our Promise to You</h2>
-        <ul class="plain-list">
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+        <h2 class="mb-4 text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Our Promise to You</h2>
+        <ul class="space-y-3 pl-5 text-lg leading-8 text-slate-600 marker:text-brand-blue">
             <li>Arrive on time and ready to work</li>
             <li>Diagnose issues honestly and accurately</li>
             <li>Provide transparent, upfront pricing</li>

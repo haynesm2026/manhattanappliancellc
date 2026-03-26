@@ -18,36 +18,36 @@ $faqs = [
 
 render_header($page, $site, $navItems);
 ?>
-<section class="page-hero">
-    <div class="wrap narrow">
-        <p class="eyebrow">Resources</p>
-        <h1>Helpful answers before you schedule service.</h1>
-        <p class="lede">Find quick guidance on pricing, warranty coverage, booking, and what information to have ready when you contact us.</p>
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Resources</p>
+        <h1 class="mb-5 text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">Helpful answers before you schedule service.</h1>
+        <p class="text-lg leading-8 text-slate-600">Find quick guidance on pricing, warranty coverage, booking, and what information to have ready when you contact us.</p>
     </div>
 </section>
 
-<section class="section">
-    <div class="wrap two-column align-start">
-        <div class="panel">
-            <h2>Frequently Asked Questions</h2>
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="rounded-[24px] border border-brand-line bg-white p-8 shadow-panel">
+            <h2 class="mb-4 text-3xl font-semibold tracking-tight text-brand-ink">Frequently Asked Questions</h2>
             <?php foreach ($faqs as $item): ?>
-                <div class="faq-item">
-                    <h3><?= htmlspecialchars($item['q']) ?></h3>
-                    <p><?= htmlspecialchars($item['a']) ?></p>
+                <div class="border-t border-brand-line py-6 first:border-t-0 first:pt-0">
+                    <h3 class="mb-2 text-xl font-semibold tracking-tight text-brand-ink"><?= htmlspecialchars($item['q']) ?></h3>
+                    <p class="text-lg leading-8 text-slate-600"><?= htmlspecialchars($item['a']) ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="panel panel-image">
-            <img class="feature-image" src="<?= asset_url('assets/images/resources.jpg') ?>" alt="Appliance service resources">
-            <h2>Before You Call</h2>
-            <ul class="plain-list">
+        <div class="rounded-[24px] border border-brand-line bg-white p-8 shadow-panel">
+            <img class="mb-6 aspect-[4/3] w-full rounded-[18px] object-cover" src="<?= asset_url('assets/images/resources.jpg') ?>" alt="Appliance service resources">
+            <h2 class="mb-4 text-3xl font-semibold tracking-tight text-brand-ink">Before You Call</h2>
+            <ul class="mb-6 space-y-2 pl-5 text-lg leading-8 text-slate-600 marker:text-brand-blue">
                 <li>Appliance brand and model number</li>
                 <li>Description of the problem</li>
                 <li>When the issue started</li>
                 <li>Your preferred appointment times</li>
             </ul>
-            <h3>What to Expect</h3>
-            <ul class="plain-list">
+            <h3 class="mb-3 text-2xl font-semibold tracking-tight text-brand-ink">What to Expect</h3>
+            <ul class="space-y-2 pl-5 text-lg leading-8 text-slate-600 marker:text-brand-blue">
                 <li>Scheduled appointment window</li>
                 <li>Uniformed, professional technician</li>
                 <li>Upfront pricing before work begins</li>

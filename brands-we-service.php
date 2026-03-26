@@ -11,25 +11,25 @@ $brands = ['Amana', 'Asko', 'Avanti', 'Bakers Pride', 'Bertazzoni', 'Blomberg', 
 
 render_header($page, $site, $navItems);
 ?>
-<section class="page-hero">
-    <div class="wrap narrow">
-        <p class="eyebrow">Brands</p>
-        <h1>Major appliance brands we service.</h1>
-        <p class="lede">We work on both residential and commercial equipment from premium, mainstream, and specialty manufacturers.</p>
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Brands</p>
+        <h1 class="mb-5 text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">Major appliance brands we service.</h1>
+        <p class="text-lg leading-8 text-slate-600">We work on both residential and commercial equipment from premium, mainstream, and specialty manufacturers.</p>
     </div>
 </section>
 
-<section class="section">
-    <div class="wrap prose">
-        <h2>Selected Brands</h2>
-        <p>Our technicians service brands including Miele, Fisher & Paykel, BlueStar, Amana, Bosch, Electrolux, Viking, Frigidaire, KitchenAid, Whirlpool, LG, GE, Samsung, Hoshizaki, Liebherr, and many more.</p>
-        <ul class="brand-grid">
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-6xl">
+        <h2 class="mb-4 text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Selected Brands</h2>
+        <p class="mb-8 text-lg leading-8 text-slate-600">Our technicians service brands including Miele, Fisher & Paykel, BlueStar, Amana, Bosch, Electrolux, Viking, Frigidaire, KitchenAid, Whirlpool, LG, GE, Samsung, Hoshizaki, Liebherr, and many more.</p>
+        <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <?php foreach ($brands as $brand): ?>
-                <li><?= htmlspecialchars($brand) ?></li>
+                <li class="rounded-2xl border border-brand-line bg-white px-4 py-3 text-slate-700 shadow-panel"><?= htmlspecialchars($brand) ?></li>
             <?php endforeach; ?>
         </ul>
-        <h2>Appliance Types</h2>
-        <p>We service cooktops, stoves, ovens, vent hoods, dishwashers, refrigerators, freezers, ice machines, wine coolers, grills, washers, dryers, washer/dryer combos, salamander broilers, and more.</p>
+        <h2 class="mb-4 mt-12 text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Appliance Types</h2>
+        <p class="text-lg leading-8 text-slate-600">We service cooktops, stoves, ovens, vent hoods, dishwashers, refrigerators, freezers, ice machines, wine coolers, grills, washers, dryers, washer/dryer combos, salamander broilers, and more.</p>
     </div>
 </section>
 
