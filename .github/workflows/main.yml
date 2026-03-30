@@ -48,15 +48,14 @@ jobs:
           test -n "${{ secrets.FTP_HOST }}" || (echo "::error::Missing FTP_HOST secret" && exit 1)
           test -n "${{ secrets.FTP_USERNAME }}" || (echo "::error::Missing FTP_USERNAME secret" && exit 1)
           test -n "${{ secrets.FTP_PASSWORD }}" || (echo "::error::Missing FTP_PASSWORD secret" && exit 1)
-          test -n "${{ secrets.FTP_REMOTE_DIR }}" || (echo "::error::Missing FTP_REMOTE_DIR secret" && exit 1)
 
       - name: Deploy files to IONOS via FTPS
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_REMOTE_DIR: ${{ secrets.FTP_REMOTE_DIR }}
-          FTP_PORT: ${{ secrets.FTP_PORT || '21' }}
+          FTP_REMOTE_DIR: /
+          FTP_PORT: 21
         run: |
           lftp -u "$FTP_USERNAME","$FTP_PASSWORD" -p "$FTP_PORT" "$FTP_HOST" <<EOF
           set ssl:verify-certificate no
