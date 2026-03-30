@@ -26,7 +26,7 @@ render_header($page, $site, $navItems);
             <p class="mb-3 text-lg text-slate-600"><strong>Service Areas:</strong> Manhattan, NY and select counties in New Jersey</p>
             <p class="mb-6 text-lg text-slate-600"><strong>Business Hours:</strong> Mon - Fri, 9:00 - 17:00</p>
             <div class="flex flex-col gap-4 sm:flex-row">
-                <a class="inline-flex items-center justify-center rounded-full bg-brand-blue px-7 py-3 text-base font-semibold text-white transition hover:bg-sky-800" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
+                <a class="inline-flex items-center justify-center rounded-full bg-brand-teal px-7 py-3 text-base font-semibold text-white transition hover:brightness-95" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
                 <a class="inline-flex items-center justify-center rounded-full border border-brand-line bg-white px-7 py-3 text-base font-semibold text-brand-blue transition hover:bg-brand-soft" href="<?= htmlspecialchars($site['phone_href']) ?>">Call Now</a>
             </div>
         </article>

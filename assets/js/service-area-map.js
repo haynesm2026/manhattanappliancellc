@@ -50,36 +50,36 @@
     function baseStyle(zip) {
         if (isManhattanZip(zip)) {
             return {
-                color: '#2b5f89',
+                color: '#4A96A2',
                 weight: 1.25,
-                fillColor: '#2b5f89',
-                fillOpacity: 0.22
+                fillColor: '#4A96A2',
+                fillOpacity: 0.2
             };
         }
 
         return {
-            color: '#66bac7',
+            color: '#1F3A44',
             weight: 1.15,
-            fillColor: '#2bb3c0',
-            fillOpacity: 0.14
+            fillColor: '#4A96A2',
+            fillOpacity: 0.12
         };
     }
 
     function hoverStyle(zip) {
         if (isManhattanZip(zip)) {
             return {
-                color: '#173d59',
+                color: '#1F3A44',
                 weight: 2.4,
-                fillColor: '#2b5f89',
-                fillOpacity: 0.42
+                fillColor: '#FF7A59',
+                fillOpacity: 0.4
             };
         }
 
         return {
-            color: '#188f9c',
+            color: '#1F3A44',
             weight: 2.2,
-            fillColor: '#2bb3c0',
-            fillOpacity: 0.34
+            fillColor: '#FF7A59',
+            fillOpacity: 0.28
         };
     }
 

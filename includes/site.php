@@ -60,11 +60,12 @@ function render_header(array $page, array $site, array $navItems): void
                 extend: {
                     colors: {
                         brand: {
-                            blue: '#2b5f89',
-                            teal: '#66bac7',
-                            ink: '#1f2933',
-                            soft: '#f5f8fb',
-                            line: '#dbe6ee'
+                            blue: '#4A96A2',
+                            teal: '#FF7A59',
+                            navy: '#1F3A44',
+                            ink: '#2B2B2B',
+                            soft: '#F4F7F8',
+                            line: '#D9E4E7'
                         }
                     },
                     fontFamily: {
@@ -114,7 +115,7 @@ function render_header(array $page, array $site, array $navItems): void
 
         .hero-slideshow::after {
             content: "";
-            background: linear-gradient(180deg, rgba(12, 26, 38, 0.45), rgba(12, 26, 38, 0.56));
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.68));
         }
 
         .testimonial-slider {
@@ -139,7 +140,7 @@ function render_header(array $page, array $site, array $navItems): void
             width: 12px;
             height: 12px;
             border-radius: 999px;
-            background: #e5e7eb;
+            background: rgba(74, 150, 162, 0.2);
             animation: testimonial-dot-cycle 20s infinite;
             display: inline-block;
         }
@@ -159,7 +160,7 @@ function render_header(array $page, array $site, array $navItems): void
 
         .service-area-banner-image::after {
             content: "";
-            background: rgba(15, 23, 42, 0.48);
+            background: rgba(0, 0, 0, 0.54);
         }
 
         @keyframes hero-fade {
@@ -178,8 +179,8 @@ function render_header(array $page, array $site, array $navItems): void
         }
 
         @keyframes testimonial-dot-cycle {
-            0%, 15% { background: #111827; transform: scale(1); }
-            20%, 100% { background: #e5e7eb; transform: scale(0.92); }
+            0%, 15% { background: #FF7A59; transform: scale(1); }
+            20%, 100% { background: rgba(74, 150, 162, 0.2); transform: scale(0.92); }
         }
 
         @media (max-width: 900px) {
@@ -200,10 +201,10 @@ function render_header(array $page, array $site, array $navItems): void
         }
     </style>
 </head>
-<body class="bg-white font-sans text-brand-ink">
-<div class="min-h-screen bg-white">
-    <header class="border-b border-brand-line bg-white">
-        <div class="sticky top-0 z-[90] border-b border-brand-line bg-white/95 shadow-sm backdrop-blur lg:static lg:border-b-0 lg:bg-white lg:shadow-none">
+<body class="bg-brand-soft font-sans text-brand-ink">
+<div class="min-h-screen bg-brand-soft">
+    <header class="border-b border-brand-line/35 bg-brand-soft">
+        <div class="sticky top-0 z-[90] border-b border-brand-line/35 bg-brand-soft/95 shadow-sm backdrop-blur lg:static lg:border-b-0 lg:bg-brand-soft lg:shadow-none">
             <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
             <a class="flex items-center gap-3 text-brand-ink no-underline" href="<?= page_url('home') ?>">
                 <img class="w-14 sm:w-20" src="<?= asset_url('assets/images/logo.png') ?>" alt="<?= htmlspecialchars($site['name']) ?> logo">
@@ -215,7 +216,7 @@ function render_header(array $page, array $site, array $navItems): void
             </div>
             <button
                 type="button"
-                class="inline-flex h-11 w-11 items-center justify-center rounded-full text-brand-blue transition hover:bg-brand-soft lg:hidden"
+                class="inline-flex h-11 w-11 items-center justify-center rounded-full text-brand-navy transition hover:bg-brand-blue/10 lg:hidden"
                 aria-label="Toggle menu"
                 aria-expanded="false"
                 data-mobile-menu-button
@@ -229,12 +230,12 @@ function render_header(array $page, array $site, array $navItems): void
             </button>
         </div>
         </div>
-        <div class="border-t border-brand-line/80 bg-white px-4 py-4 lg:hidden">
+        <div class="border-t border-brand-line/35 bg-brand-soft px-4 py-4 lg:hidden">
             <div class="mx-auto flex w-full max-w-7xl justify-center">
-                <a class="inline-flex min-w-[180px] items-center justify-center rounded-full bg-brand-blue px-7 py-3 text-base font-semibold text-white transition hover:bg-sky-800" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
+                <a class="inline-flex min-w-[180px] items-center justify-center rounded-full bg-brand-teal px-7 py-3 text-base font-semibold text-white transition hover:brightness-95" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
             </div>
         </div>
-        <div class="border-t border-brand-line/80 bg-white/95 backdrop-blur">
+        <div class="border-t border-brand-line/35 bg-brand-soft/95 backdrop-blur">
             <div class="mx-auto hidden w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:flex lg:px-8">
                 <nav aria-label="Primary">
                     <ul class="flex flex-wrap items-center gap-x-6 gap-y-3 text-[15px] font-semibold text-slate-600">
@@ -247,7 +248,7 @@ function render_header(array $page, array $site, array $navItems): void
                     <?php endforeach; ?>
                     </ul>
                 </nav>
-                <a class="inline-flex items-center justify-center rounded-full bg-brand-blue px-7 py-3 text-base font-semibold text-white transition hover:bg-sky-800" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
+                <a class="inline-flex items-center justify-center rounded-full bg-brand-teal px-7 py-3 text-base font-semibold text-white transition hover:brightness-95" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
             </div>
         </div>
     </header>
@@ -258,7 +259,7 @@ function render_header(array $page, array $site, array $navItems): void
         <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm" data-mobile-menu-close></div>
         
         <!-- Sidebar -->
-        <div class="fixed inset-y-0 right-0 flex w-[66.6667vw] max-w-[66.6667vw] translate-x-full flex-col bg-brand-blue shadow-2xl transition-transform duration-300 ease-out" data-mobile-menu-drawer>
+        <div class="fixed inset-y-0 right-0 flex w-[66.6667vw] max-w-[66.6667vw] translate-x-full flex-col bg-brand-navy shadow-2xl transition-transform duration-300 ease-out" data-mobile-menu-drawer>
             <div class="flex items-center justify-end p-5">
                 <button type="button" class="p-2 text-white/80 hover:text-white" data-mobile-menu-close aria-label="Close menu">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -284,7 +285,7 @@ function render_header(array $page, array $site, array $navItems): void
                     </div>
                 </div>
                 <div class="mt-10 border-t border-white/10 pt-10">
-                    <a class="inline-flex w-full items-center justify-center rounded-full bg-white px-7 py-4 text-lg font-bold text-brand-blue transition hover:bg-slate-100" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
+                    <a class="inline-flex w-full items-center justify-center rounded-full bg-brand-teal px-7 py-4 text-lg font-bold text-white transition hover:brightness-95" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
                 </div>
             </nav>
         </div>
@@ -298,13 +299,13 @@ function render_footer(array $site): void
 {
     ?>
     </main>
-    <footer class="mt-0 bg-white">
-        <div class="bg-brand-blue py-12 text-center text-white sm:py-24">
+    <footer class="mt-0 bg-brand-soft">
+        <div class="bg-brand-navy py-12 text-center text-white sm:py-24">
             <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h2 class="mx-auto max-w-[280px] text-3xl font-normal leading-tight tracking-tight sm:max-w-none sm:text-5xl">Reliable Appliance Repair Starts Here</h2>
+                <h2 class="mx-auto max-w-[280px] text-3xl font-normal leading-tight tracking-tight text-white sm:max-w-none sm:text-5xl">Reliable Appliance Repair Starts Here</h2>
             </div>
         </div>
-        <div class="bg-white py-12 sm:py-20">
+        <div class="bg-brand-soft py-12 sm:py-20">
             <div class="mx-auto grid w-full max-w-7xl gap-10 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.15fr_1fr_1fr_0.7fr] lg:px-8">
                 <div class="flex justify-center sm:col-span-2 lg:col-span-1">
                     <img class="w-32 sm:w-48" src="<?= asset_url('assets/images/logo.png') ?>" alt="<?= htmlspecialchars($site['name']) ?> logo">
@@ -361,7 +362,7 @@ function render_cta(array $site, string $title, string $copy): void
 {
     ?>
     <section class="px-4 py-16 sm:px-6 lg:px-8">
-        <div class="mx-auto w-full max-w-6xl rounded-[28px] border border-brand-line bg-white px-8 py-10 shadow-panel">
+        <div class="mx-auto w-full max-w-6xl rounded-[28px] border border-brand-line/35 bg-white px-8 py-10 shadow-panel">
             <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                     <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Schedule Service</p>
@@ -369,8 +370,8 @@ function render_cta(array $site, string $title, string $copy): void
                     <p class="max-w-2xl text-lg leading-8 text-slate-600"><?= htmlspecialchars($copy) ?></p>
                 </div>
                 <div class="flex flex-col gap-4 sm:flex-row">
-                    <a class="inline-flex items-center justify-center rounded-full bg-brand-blue px-7 py-3 text-base font-semibold text-white transition hover:bg-sky-800" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
-                    <a class="inline-flex items-center justify-center rounded-full border border-brand-line bg-white px-7 py-3 text-base font-semibold text-brand-blue transition hover:border-brand-blue/40 hover:bg-brand-soft" href="<?= htmlspecialchars($site['phone_href']) ?>">Call <?= htmlspecialchars($site['phone']) ?></a>
+                    <a class="inline-flex items-center justify-center rounded-full bg-brand-teal px-7 py-3 text-base font-semibold text-white transition hover:brightness-95" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
+                    <a class="inline-flex items-center justify-center rounded-full border border-brand-line/50 bg-white px-7 py-3 text-base font-semibold text-brand-blue transition hover:border-brand-blue hover:bg-brand-soft" href="<?= htmlspecialchars($site['phone_href']) ?>">Call <?= htmlspecialchars($site['phone']) ?></a>
                 </div>
             </div>
         </div>

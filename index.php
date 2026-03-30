@@ -53,6 +53,14 @@ $featuredTestimonials = [
     $testimonials[2],
 ];
 
+$landingLinks = [
+    ['href' => '/appliance-repair-manhattan', 'title' => 'Appliance Repair Manhattan', 'copy' => 'General high-intent page for Manhattan service calls and premium residential repairs.'],
+    ['href' => '/sub-zero-repair-nyc', 'title' => 'Sub-Zero Repair NYC', 'copy' => 'Focused landing page for premium Sub-Zero refrigeration leads in Manhattan.'],
+    ['href' => '/miele-repair-nyc', 'title' => 'Miele Repair NYC', 'copy' => 'Brand-specific page for Miele dishwashers, laundry, and cooking appliances.'],
+    ['href' => '/viking-repair-nyc', 'title' => 'Viking Repair NYC', 'copy' => 'Dedicated page for Viking ranges, ovens, cooktops, and refrigeration.'],
+    ['href' => '/appliance-repair-new-jersey', 'title' => 'Appliance Repair New Jersey', 'copy' => 'Coverage page for approved New Jersey service routes and ZIP-confirmed calls.'],
+];
+
 render_header($page, $site, $navItems);
 ?>
 <section class="relative overflow-hidden bg-slate-900">
@@ -69,7 +77,7 @@ render_header($page, $site, $navItems);
             </h1>
             <p class="mx-auto max-w-4xl text-[0.95rem] font-medium leading-8 text-white/90 sm:text-lg">Residential and commercial appliance repair in Manhattan and New Jersey counties, delivered by licensed, certified experts.</p>
             <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-8 sm:flex-row sm:gap-4">
-                <a class="inline-flex min-w-[184px] items-center justify-center rounded-full bg-brand-blue px-8 py-3 text-base font-semibold text-white shadow-lg transition hover:bg-sky-800" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
+                <a class="inline-flex min-w-[184px] items-center justify-center rounded-full bg-brand-teal px-8 py-3 text-base font-semibold text-white shadow-lg transition hover:brightness-95" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
                 <a class="inline-flex min-w-[184px] items-center justify-center rounded-full border border-white/25 bg-white px-8 py-3 text-base font-semibold text-brand-blue shadow-lg transition hover:bg-brand-soft" href="<?= htmlspecialchars($site['zip_url']) ?>" target="_blank" rel="noreferrer">Zip Codes We Service</a>
             </div>
         </div>
@@ -94,7 +102,7 @@ render_header($page, $site, $navItems);
             <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Our Services</p>
             <h2 class="max-w-4xl text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">Coverage for the appliances people depend on every day.</h2>
         </div>
-        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-5">
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
             <?php foreach ($serviceCards as $card): ?>
                 <article class="overflow-hidden rounded-[24px] border border-brand-line bg-white shadow-panel">
                     <img class="aspect-[4/3] w-full object-cover" src="<?= asset_url($card['image']) ?>" alt="<?= htmlspecialchars($card['title']) ?>">
@@ -108,6 +116,25 @@ render_header($page, $site, $navItems);
                         </ul>
                     </div>
                 </article>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+        <div class="mb-8 max-w-4xl">
+            <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Focused Pages</p>
+            <h2 class="text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">Dedicated landing pages for high-intent service searches.</h2>
+            <p class="mt-4 text-lg leading-8 text-slate-600">These pages were added to support PPC traffic, location-specific search intent, and faster call or booking decisions.</p>
+        </div>
+        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+            <?php foreach ($landingLinks as $link): ?>
+                <a class="rounded-[24px] border border-brand-line bg-white p-6 shadow-panel transition hover:-translate-y-1 hover:border-brand-blue/40" href="<?= htmlspecialchars($link['href']) ?>">
+                    <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Landing Page</p>
+                    <h3 class="mt-3 text-2xl font-semibold tracking-tight text-brand-ink"><?= htmlspecialchars($link['title']) ?></h3>
+                    <p class="mt-3 text-base leading-7 text-slate-600"><?= htmlspecialchars($link['copy']) ?></p>
+                </a>
             <?php endforeach; ?>
         </div>
     </div>

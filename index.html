@@ -1,284 +1,584 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Appliance Repair Services in Manhattan and New Jersey | Manhattan Appliance LLC</title>
-  <meta name="description" content="Premium residential and commercial appliance repair across Manhattan and select New Jersey counties.">
-  <link rel="icon" href="/assets/images/logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css">
-  <script src="/assets/js/mobile-menu.js" defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Appliance Repair Services in Manhattan and New Jersey | Manhattan Appliance LLC</title>
+    <meta name="description" content="Premium residential and commercial appliance repair across Manhattan and select New Jersey counties.">
+    <link rel="icon" href="/assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#4A96A2',
+                            teal: '#FF7A59',
+                            navy: '#1F3A44',
+                            ink: '#2B2B2B',
+                            soft: '#F4F7F8',
+                            line: '#D9E4E7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif']
+                    },
+                    boxShadow: {
+                        panel: '0 12px 30px rgba(15, 23, 42, 0.08)'
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="/assets/js/mobile-menu.js" defer></script>
+        <style>
+        .hero-slideshow,
+        .hero-slide,
+        .hero-slideshow::after,
+        .service-area-banner-image,
+        .service-area-banner-image::after {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-slide {
+            background-position: center;
+            background-size: cover;
+            opacity: 0;
+            transform: scale(1.02);
+            animation: hero-fade 18s infinite;
+        }
+
+        .hero-slide-1 {
+            background-image: url("/assets/images/GB+Domestic+Appliance+Repairs-011.jpg");
+            animation-delay: 0s;
+        }
+
+        .hero-slide-2 {
+            background-image: url("/assets/images/shutterstock_1081332008.jpg");
+            animation-delay: 6s;
+        }
+
+        .hero-slide-3 {
+            background-image: url("/assets/images/Manhattan-Appliance-LLC-020.jpg");
+            animation-delay: 12s;
+        }
+
+        .hero-slideshow::after {
+            content: "";
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.68));
+        }
+
+        .testimonial-slider {
+            --testimonial-slide-width: clamp(290px, 28vw, 380px);
+            --testimonial-gap: 28px;
+            --testimonial-step: calc(var(--testimonial-slide-width) + var(--testimonial-gap));
+            overflow: hidden;
+        }
+
+        .testimonial-track {
+            display: flex;
+            gap: var(--testimonial-gap);
+            width: max-content;
+            animation: testimonial-scroll 20s ease-in-out infinite;
+        }
+
+        .testimonial-slide {
+            flex: 0 0 var(--testimonial-slide-width);
+        }
+
+        .testimonial-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: rgba(74, 150, 162, 0.2);
+            animation: testimonial-dot-cycle 20s infinite;
+            display: inline-block;
+        }
+
+        .testimonial-dots span:nth-child(1) { animation-delay: 0s; }
+        .testimonial-dots span:nth-child(2) { animation-delay: 4s; }
+        .testimonial-dots span:nth-child(3) { animation-delay: 8s; }
+        .testimonial-dots span:nth-child(4) { animation-delay: 12s; }
+        .testimonial-dots span:nth-child(5) { animation-delay: 16s; }
+
+        .service-area-banner-image {
+            background-image: url("/assets/images/shutterstock_2473408983.jpg");
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .service-area-banner-image::after {
+            content: "";
+            background: rgba(0, 0, 0, 0.54);
+        }
+
+        @keyframes hero-fade {
+            0%, 28% { opacity: 0; }
+            33%, 61% { opacity: 1; }
+            66%, 100% { opacity: 0; }
+        }
+
+        @keyframes testimonial-scroll {
+            0%, 15% { transform: translateX(0); }
+            20%, 35% { transform: translateX(calc(-1 * var(--testimonial-step))); }
+            40%, 55% { transform: translateX(calc(-2 * var(--testimonial-step))); }
+            60%, 75% { transform: translateX(calc(-3 * var(--testimonial-step))); }
+            80%, 95% { transform: translateX(calc(-4 * var(--testimonial-step))); }
+            100% { transform: translateX(calc(-5 * var(--testimonial-step))); }
+        }
+
+        @keyframes testimonial-dot-cycle {
+            0%, 15% { background: #FF7A59; transform: scale(1); }
+            20%, 100% { background: rgba(74, 150, 162, 0.2); transform: scale(0.92); }
+        }
+
+        @media (max-width: 900px) {
+            .testimonial-slider {
+                --testimonial-slide-width: min(70vw, 420px);
+            }
+
+            .service-area-banner-image {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .testimonial-slider {
+                --testimonial-slide-width: 82vw;
+                --testimonial-gap: 18px;
+            }
+        }
+    </style>
 </head>
-<body>
-<div class="site-shell">
-  <header class="topbar">
-    <div class="wrap topbar-inner">
-      <a class="brand" href="/index.html">
-        <img src="/assets/images/logo.png" alt="Manhattan Appliance LLC logo">
-        <span>Manhattan Appliance LLC</span>
-      </a>
-      <div class="topbar-contact">
-        <a href="tel:+19175220890">(917) 522-0890</a>
-        <a href="mailto:office@manhattanappliancellc.com">office@manhattanappliancellc.com</a>
-      </div>
-      <button type="button" class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" data-mobile-menu-button>
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-mobile-menu-open-icon><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" class="hidden" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-mobile-menu-close-icon><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
+<body class="bg-brand-soft font-sans text-brand-ink">
+<div class="min-h-screen bg-brand-soft">
+    <header class="border-b border-brand-line/35 bg-brand-soft">
+        <div class="sticky top-0 z-[90] border-b border-brand-line/35 bg-brand-soft/95 shadow-sm backdrop-blur lg:static lg:border-b-0 lg:bg-brand-soft lg:shadow-none">
+            <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+            <a class="flex items-center gap-3 text-brand-ink no-underline" href="/">
+                <img class="w-14 sm:w-20" src="/assets/images/logo.png" alt="Manhattan Appliance LLC logo">
+                <span class="hidden text-xl font-semibold tracking-tight sm:inline">Manhattan Appliance LLC</span>
+            </a>
+            <div class="hidden flex-wrap items-center justify-end gap-5 text-sm font-medium text-slate-600 lg:flex">
+                <a class="transition hover:text-brand-blue" href="tel:+19175220890">(917) 522-0890</a>
+                <a class="transition hover:text-brand-blue" href="mailto:office@manhattanappliancellc.com">office@manhattanappliancellc.com</a>
+            </div>
+            <button
+                type="button"
+                class="inline-flex h-11 w-11 items-center justify-center rounded-full text-brand-navy transition hover:bg-brand-blue/10 lg:hidden"
+                aria-label="Toggle menu"
+                aria-expanded="false"
+                data-mobile-menu-button
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" data-mobile-menu-open-icon>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="hidden h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" data-mobile-menu-close-icon>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />
+                </svg>
+            </button>
+        </div>
+        </div>
+        <div class="border-t border-brand-line/35 bg-brand-soft px-4 py-4 lg:hidden">
+            <div class="mx-auto flex w-full max-w-7xl justify-center">
+                <a class="inline-flex min-w-[180px] items-center justify-center rounded-full bg-brand-teal px-7 py-3 text-base font-semibold text-white transition hover:brightness-95" href="https://book.housecallpro.com/book/Manhattan-Appliance-LLC/782b6e8d55ed436e8acce1d4b8f2f33d?v2=true" target="_blank" rel="noreferrer">Book Online</a>
+            </div>
+        </div>
+        <div class="border-t border-brand-line/35 bg-brand-soft/95 backdrop-blur">
+            <div class="mx-auto hidden w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:flex lg:px-8">
+                <nav aria-label="Primary">
+                    <ul class="flex flex-wrap items-center gap-x-6 gap-y-3 text-[15px] font-semibold text-slate-600">
+                                            <li>
+                            <a class="transition hover:text-brand-blue text-brand-blue" href="/">
+                                Home                            </a>
+                        </li>
+                                            <li>
+                            <a class="transition hover:text-brand-blue" href="/services">
+                                Services                            </a>
+                        </li>
+                                            <li>
+                            <a class="transition hover:text-brand-blue" href="/clients">
+                                Clients                            </a>
+                        </li>
+                                            <li>
+                            <a class="transition hover:text-brand-blue" href="/service-areas">
+                                Service Areas                            </a>
+                        </li>
+                                            <li>
+                            <a class="transition hover:text-brand-blue" href="/why-manhattan-appliance">
+                                Why Manhattan Appliance                            </a>
+                        </li>
+                                            <li>
+                            <a class="transition hover:text-brand-blue" href="/resources">
+                                Resources                            </a>
+                        </li>
+                                            <li>
+                            <a class="transition hover:text-brand-blue" href="/contact">
+                                Contact                            </a>
+                        </li>
+                                        </ul>
+                </nav>
+                <a class="inline-flex items-center justify-center rounded-full bg-brand-teal px-7 py-3 text-base font-semibold text-white transition hover:brightness-95" href="https://book.housecallpro.com/book/Manhattan-Appliance-LLC/782b6e8d55ed436e8acce1d4b8f2f33d?v2=true" target="_blank" rel="noreferrer">Book Online</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Sidebar -->
+    <div class="fixed inset-0 z-[100] opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden" data-mobile-menu>
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm" data-mobile-menu-close></div>
+        
+        <!-- Sidebar -->
+        <div class="fixed inset-y-0 right-0 flex w-[66.6667vw] max-w-[66.6667vw] translate-x-full flex-col bg-brand-navy shadow-2xl transition-transform duration-300 ease-out" data-mobile-menu-drawer>
+            <div class="flex items-center justify-end p-5">
+                <button type="button" class="p-2 text-white/80 hover:text-white" data-mobile-menu-close aria-label="Close menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <nav class="flex-1 overflow-y-auto px-8 py-4">
+                <ul class="space-y-7">
+                                            <li>
+                            <a class="block text-xl font-semibold text-white/90 transition hover:text-white text-white" href="/" data-mobile-menu-close>
+                                Home                            </a>
+                        </li>
+                                            <li>
+                            <a class="block text-xl font-semibold text-white/90 transition hover:text-white " href="/services" data-mobile-menu-close>
+                                Services                            </a>
+                        </li>
+                                            <li>
+                            <a class="block text-xl font-semibold text-white/90 transition hover:text-white " href="/clients" data-mobile-menu-close>
+                                Clients                            </a>
+                        </li>
+                                            <li>
+                            <a class="block text-xl font-semibold text-white/90 transition hover:text-white " href="/service-areas" data-mobile-menu-close>
+                                Service Areas                            </a>
+                        </li>
+                                            <li>
+                            <a class="block text-xl font-semibold text-white/90 transition hover:text-white " href="/why-manhattan-appliance" data-mobile-menu-close>
+                                Why Manhattan Appliance                            </a>
+                        </li>
+                                            <li>
+                            <a class="block text-xl font-semibold text-white/90 transition hover:text-white " href="/resources" data-mobile-menu-close>
+                                Resources                            </a>
+                        </li>
+                                            <li>
+                            <a class="block text-xl font-semibold text-white/90 transition hover:text-white " href="/contact" data-mobile-menu-close>
+                                Contact                            </a>
+                        </li>
+                                    </ul>
+                <div class="mt-12 border-t border-white/10 pt-10 text-white/85">
+                    <div class="space-y-4 text-base font-medium">
+                        <a class="block hover:text-white" href="tel:+19175220890" data-mobile-menu-close>(917) 522-0890</a>
+                        <a class="block break-all hover:text-white" href="mailto:office@manhattanappliancellc.com" data-mobile-menu-close>office@manhattanappliancellc.com</a>
+                    </div>
+                </div>
+                <div class="mt-10 border-t border-white/10 pt-10">
+                    <a class="inline-flex w-full items-center justify-center rounded-full bg-brand-teal px-7 py-4 text-lg font-bold text-white transition hover:brightness-95" href="https://book.housecallpro.com/book/Manhattan-Appliance-LLC/782b6e8d55ed436e8acce1d4b8f2f33d?v2=true" target="_blank" rel="noreferrer">Book Online</a>
+                </div>
+            </nav>
+        </div>
     </div>
-  </header>
-  <div class="nav-shell">
-    <div class="wrap nav-inner">
-      <button type="button" class="mobile-drawer-close" data-mobile-menu-close aria-label="Close menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-      <nav aria-label="Primary">
-        <ul class="nav-list">
-          <li><a class="is-active" href="/index.html">Home</a></li>
-          <li><a href="/services.html">Services</a></li>
-          <li><a href="/clients.html">Clients</a></li>
-          <li><a href="/service-areas.html">Service Areas</a></li>
-          <li><a href="/why-manhattan-appliance.html">Why Manhattan Appliance</a></li>
-          <li><a href="/resources.html">Resources</a></li>
-          <li><a href="/contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <a class="button button-primary" href="https://book.housecallpro.com/book/Manhattan-Appliance-LLC/782b6e8d55ed436e8acce1d4b8f2f33d?v2=true" target="_blank" rel="noreferrer">Book Online</a>
-    </div>
-  </div>
-  <main>
-    <section class="hero">
-      <div class="hero-slideshow" aria-hidden="true">
+
+    <main>
+<section class="relative overflow-hidden bg-slate-900">
+    <div class="hero-slideshow absolute inset-0" aria-hidden="true">
         <span class="hero-slide hero-slide-1"></span>
         <span class="hero-slide hero-slide-2"></span>
         <span class="hero-slide hero-slide-3"></span>
-      </div>
-      <div class="wrap hero-content">
-        <div class="hero-copy">
-          <h1><span class="hero-title-line">Premium Appliance Repair for</span><span class="hero-title-line">Homes &amp; Businesses</span></h1>
-          <p class="lede">Residential and commercial appliance repair in Manhattan and New Jersey counties, delivered by licensed, certified experts.</p>
-          <div class="button-row hero-actions">
-            <a class="button button-primary" href="https://book.housecallpro.com/book/Manhattan-Appliance-LLC/782b6e8d55ed436e8acce1d4b8f2f33d?v2=true" target="_blank" rel="noreferrer">Book Online</a>
-            <a class="button button-secondary" href="https://cdn.website-editor.net/s/009be738e154491f973774d06a36aa24/uploads/files/service-area.pdf" target="_blank" rel="noreferrer">Zip Codes We Service</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-intro">
-      <div class="wrap intro-panel">
-        <h2 class="section-rule">We Go the Extra Mile</h2>
-        <p>At Manhattan Appliance LLC, we go beyond standard repair services. We deliver thoughtful, precise appliance care with a focus on long-term performance, transparency, and client satisfaction.</p>
-        <p>We treat every home and business with respect, honesty, and professionalism because trust is our most valuable asset.</p>
-      </div>
-    </section>
-
-    <section class="section section-alt">
-      <div class="wrap">
-        <div class="section-heading">
-          <p class="eyebrow">Our Services</p>
-          <h2>Coverage for the appliances people depend on every day.</h2>
-        </div>
-        <div class="card-grid services-grid">
-          <article class="service-card">
-            <img src="/assets/images/service-refrigeration.jpg" alt="Refrigeration and cooling">
-            <div class="service-card-body">
-              <h3>Refrigeration &amp; Cooling</h3>
-              <p>Temperature-controlled essentials</p>
-              <ul>
-                <li>Refrigerator repairs</li>
-                <li>Freezer repairs</li>
-                <li>Ice machine repairs</li>
-                <li>Wine cooler repairs</li>
-                <li>Beverage chiller repairs</li>
-              </ul>
+    </div>
+    <div class="relative mx-auto flex min-h-[380px] w-full max-w-7xl items-center justify-center px-4 py-10 text-center sm:min-h-[470px] sm:px-6 sm:py-24 lg:px-8">
+        <div class="max-w-6xl text-white">
+            <h1 class="mx-auto mb-4 text-[2.25rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.28)] sm:mb-6 sm:text-6xl lg:text-[4rem]">
+                <span class="block whitespace-nowrap max-sm:whitespace-normal">Premium Appliance Repair for</span>
+                <span class="block whitespace-nowrap max-sm:whitespace-normal">Homes &amp; Businesses</span>
+            </h1>
+            <p class="mx-auto max-w-4xl text-[0.95rem] font-medium leading-8 text-white/90 sm:text-lg">Residential and commercial appliance repair in Manhattan and New Jersey counties, delivered by licensed, certified experts.</p>
+            <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-8 sm:flex-row sm:gap-4">
+                <a class="inline-flex min-w-[184px] items-center justify-center rounded-full bg-brand-teal px-8 py-3 text-base font-semibold text-white shadow-lg transition hover:brightness-95" href="https://book.housecallpro.com/book/Manhattan-Appliance-LLC/782b6e8d55ed436e8acce1d4b8f2f33d?v2=true" target="_blank" rel="noreferrer">Book Online</a>
+                <a class="inline-flex min-w-[184px] items-center justify-center rounded-full border border-white/25 bg-white px-8 py-3 text-base font-semibold text-brand-blue shadow-lg transition hover:bg-brand-soft" href="https://cdn.website-editor.net/s/009be738e154491f973774d06a36aa24/uploads/files/service-area.pdf" target="_blank" rel="noreferrer">Zip Codes We Service</a>
             </div>
-          </article>
-          <article class="service-card">
-            <img src="/assets/images/service-cooking.jpg" alt="Cooking appliances">
-            <div class="service-card-body">
-              <h3>Cooking Appliances</h3>
-              <p>Core cooking and heat equipment</p>
-              <ul>
-                <li>Stove repairs</li>
-                <li>Cooktop repairs</li>
-                <li>Range repairs</li>
-                <li>Oven repairs</li>
-                <li>Grill repairs</li>
-              </ul>
-            </div>
-          </article>
-          <article class="service-card">
-            <img src="/assets/images/service-dishcare.jpg" alt="Kitchen ventilation and dish care">
-            <div class="service-card-body">
-              <h3>Kitchen Ventilation &amp; Dish Care</h3>
-              <p>Clean air, clean dishes</p>
-              <ul>
-                <li>Dishwasher repairs</li>
-                <li>Vent hood repairs</li>
-              </ul>
-            </div>
-          </article>
-          <article class="service-card">
-            <img src="/assets/images/service-laundry.jpg" alt="Laundry appliances">
-            <div class="service-card-body">
-              <h3>Laundry Appliances</h3>
-              <p>Home and multi-unit laundry systems</p>
-              <ul>
-                <li>Washing machine repairs</li>
-                <li>Dryer repairs</li>
-                <li>Washer/dryer combo repairs</li>
-              </ul>
-            </div>
-          </article>
-          <article class="service-card">
-            <img src="/assets/images/service-commercial.jpg" alt="Commercial and specialty appliances">
-            <div class="service-card-body">
-              <h3>Commercial &amp; Specialty</h3>
-              <p>Professional-grade kitchen equipment</p>
-              <ul>
-                <li>Deep fryer repairs</li>
-                <li>Salamander broiler repairs</li>
-              </ul>
-            </div>
-          </article>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section">
-      <div class="wrap">
-        <div class="service-area-header">
-          <h2 class="section-rule">Where We Service</h2>
-          <p class="service-area-subtitle">Manhattan, NY | Select counties in New Jersey</p>
-          <h3 class="service-area-promise-title">Our Service Area Promise</h3>
+<section class="px-4 py-14 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+        <div class="mb-7 flex items-center justify-center gap-4 text-brand-blue">
+            <span class="h-px w-20 bg-brand-blue/40 sm:w-40"></span>
+            <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">We Go the Extra Mile</h2>
+            <span class="h-px w-20 bg-brand-blue/40 sm:w-40"></span>
         </div>
-        <div class="promise-grid">
-          <article class="promise-card"><h3>Prompt Response Times</h3><p>We understand the urgency of appliance repairs. Our service areas are designed to ensure we can reach you quickly when you need us most.</p></article>
-          <article class="promise-card"><h3>Local Expertise</h3><p>Our technicians are familiar with the unique needs of Manhattan and New Jersey properties, from high-rise apartments to commercial kitchens.</p></article>
-          <article class="promise-card"><h3>Scheduled Appointments</h3><p>We respect your time with scheduled appointment windows and punctual arrivals, minimizing disruption to your day.</p></article>
-          <article class="promise-card"><h3>Consistent Service Quality</h3><p>Whether you're in Manhattan or New Jersey, you'll receive the same high-quality service and professionalism from our team.</p></article>
+        <p class="mx-auto max-w-4xl text-lg leading-8 text-slate-600">At Manhattan Appliance LLC, we go beyond standard repair services. We deliver thoughtful, precise appliance care with a focus on long-term performance, transparency, and client satisfaction.</p>
+        <p class="mx-auto mt-5 max-w-4xl text-lg leading-8 text-slate-600">We treat every home and business with respect, honesty, and professionalism because trust is our most valuable asset.</p>
+    </div>
+</section>
+
+<section class="border-y border-brand-line bg-brand-soft/50 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+        <div class="mb-8">
+            <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Our Services</p>
+            <h2 class="max-w-4xl text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">Coverage for the appliances people depend on every day.</h2>
         </div>
-      </div>
-    </section>
+        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-5">
+                            <article class="overflow-hidden rounded-[24px] border border-brand-line bg-white shadow-panel">
+                    <img class="aspect-[4/3] w-full object-cover" src="/assets/images/service-refrigeration.jpg" alt="Refrigeration &amp; Cooling">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-2xl font-semibold tracking-tight text-brand-ink">Refrigeration &amp; Cooling</h3>
+                        <p class="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-brand-blue/70">Temperature-controlled essentials</p>
+                        <ul class="space-y-2 pl-5 text-slate-600 marker:text-brand-blue">
+                                                            <li>Refrigerator repairs</li>
+                                                            <li>Freezer repairs</li>
+                                                            <li>Ice machine repairs</li>
+                                                            <li>Wine cooler repairs</li>
+                                                            <li>Beverage chiller repairs</li>
+                                                    </ul>
+                    </div>
+                </article>
+                            <article class="overflow-hidden rounded-[24px] border border-brand-line bg-white shadow-panel">
+                    <img class="aspect-[4/3] w-full object-cover" src="/assets/images/service-cooking.jpg" alt="Cooking Appliances">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-2xl font-semibold tracking-tight text-brand-ink">Cooking Appliances</h3>
+                        <p class="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-brand-blue/70">Core cooking and heat equipment</p>
+                        <ul class="space-y-2 pl-5 text-slate-600 marker:text-brand-blue">
+                                                            <li>Stove repairs</li>
+                                                            <li>Cooktop repairs</li>
+                                                            <li>Range repairs</li>
+                                                            <li>Oven repairs</li>
+                                                            <li>Grill repairs</li>
+                                                    </ul>
+                    </div>
+                </article>
+                            <article class="overflow-hidden rounded-[24px] border border-brand-line bg-white shadow-panel">
+                    <img class="aspect-[4/3] w-full object-cover" src="/assets/images/service-dishcare.jpg" alt="Kitchen Ventilation &amp; Dish Care">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-2xl font-semibold tracking-tight text-brand-ink">Kitchen Ventilation &amp; Dish Care</h3>
+                        <p class="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-brand-blue/70">Clean air, clean dishes</p>
+                        <ul class="space-y-2 pl-5 text-slate-600 marker:text-brand-blue">
+                                                            <li>Dishwasher repairs</li>
+                                                            <li>Vent hood repairs</li>
+                                                    </ul>
+                    </div>
+                </article>
+                            <article class="overflow-hidden rounded-[24px] border border-brand-line bg-white shadow-panel">
+                    <img class="aspect-[4/3] w-full object-cover" src="/assets/images/service-laundry.jpg" alt="Laundry Appliances">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-2xl font-semibold tracking-tight text-brand-ink">Laundry Appliances</h3>
+                        <p class="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-brand-blue/70">Home and multi-unit laundry systems</p>
+                        <ul class="space-y-2 pl-5 text-slate-600 marker:text-brand-blue">
+                                                            <li>Washing machine repairs</li>
+                                                            <li>Dryer repairs</li>
+                                                            <li>Washer/dryer combo repairs</li>
+                                                    </ul>
+                    </div>
+                </article>
+                            <article class="overflow-hidden rounded-[24px] border border-brand-line bg-white shadow-panel">
+                    <img class="aspect-[4/3] w-full object-cover" src="/assets/images/service-commercial.jpg" alt="Commercial &amp; Specialty">
+                    <div class="p-6">
+                        <h3 class="mb-2 text-2xl font-semibold tracking-tight text-brand-ink">Commercial &amp; Specialty</h3>
+                        <p class="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-brand-blue/70">Professional-grade kitchen equipment</p>
+                        <ul class="space-y-2 pl-5 text-slate-600 marker:text-brand-blue">
+                                                            <li>Deep fryer repairs</li>
+                                                            <li>Salamander broiler repairs</li>
+                                                    </ul>
+                    </div>
+                </article>
+                    </div>
+    </div>
+</section>
 
-    <section class="service-area-banner">
-      <div class="service-area-banner-image" aria-hidden="true"></div>
-      <div class="wrap service-area-banner-content">
-        <h2>Outside Our Service Area?</h2>
-        <p>We're always evaluating opportunities to expand our service coverage. If you're outside our current service area but need appliance repair, please contact us. We may be able to accommodate special requests or recommend a trusted partner in your area.</p>
-      </div>
-    </section>
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+        <div class="mb-8 max-w-4xl">
+            <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Focused Pages</p>
+            <h2 class="text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">Dedicated landing pages for high-intent service searches.</h2>
+            <p class="mt-4 text-lg leading-8 text-slate-600">These pages were added to support PPC traffic, location-specific search intent, and faster call or booking decisions.</p>
+        </div>
+        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+                            <a class="rounded-[24px] border border-brand-line bg-white p-6 shadow-panel transition hover:-translate-y-1 hover:border-brand-blue/40" href="/appliance-repair-manhattan">
+                    <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Landing Page</p>
+                    <h3 class="mt-3 text-2xl font-semibold tracking-tight text-brand-ink">Appliance Repair Manhattan</h3>
+                    <p class="mt-3 text-base leading-7 text-slate-600">General high-intent page for Manhattan service calls and premium residential repairs.</p>
+                </a>
+                            <a class="rounded-[24px] border border-brand-line bg-white p-6 shadow-panel transition hover:-translate-y-1 hover:border-brand-blue/40" href="/sub-zero-repair-nyc">
+                    <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Landing Page</p>
+                    <h3 class="mt-3 text-2xl font-semibold tracking-tight text-brand-ink">Sub-Zero Repair NYC</h3>
+                    <p class="mt-3 text-base leading-7 text-slate-600">Focused landing page for premium Sub-Zero refrigeration leads in Manhattan.</p>
+                </a>
+                            <a class="rounded-[24px] border border-brand-line bg-white p-6 shadow-panel transition hover:-translate-y-1 hover:border-brand-blue/40" href="/miele-repair-nyc">
+                    <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Landing Page</p>
+                    <h3 class="mt-3 text-2xl font-semibold tracking-tight text-brand-ink">Miele Repair NYC</h3>
+                    <p class="mt-3 text-base leading-7 text-slate-600">Brand-specific page for Miele dishwashers, laundry, and cooking appliances.</p>
+                </a>
+                            <a class="rounded-[24px] border border-brand-line bg-white p-6 shadow-panel transition hover:-translate-y-1 hover:border-brand-blue/40" href="/viking-repair-nyc">
+                    <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Landing Page</p>
+                    <h3 class="mt-3 text-2xl font-semibold tracking-tight text-brand-ink">Viking Repair NYC</h3>
+                    <p class="mt-3 text-base leading-7 text-slate-600">Dedicated page for Viking ranges, ovens, cooktops, and refrigeration.</p>
+                </a>
+                            <a class="rounded-[24px] border border-brand-line bg-white p-6 shadow-panel transition hover:-translate-y-1 hover:border-brand-blue/40" href="/appliance-repair-new-jersey">
+                    <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Landing Page</p>
+                    <h3 class="mt-3 text-2xl font-semibold tracking-tight text-brand-ink">Appliance Repair New Jersey</h3>
+                    <p class="mt-3 text-base leading-7 text-slate-600">Coverage page for approved New Jersey service routes and ZIP-confirmed calls.</p>
+                </a>
+                    </div>
+    </div>
+</section>
 
-    <section class="section section-testimonials">
-      <div class="wrap">
-        <div class="section-heading testimonial-heading">
-          <h2>What Our Clients Say</h2>
-          <p class="testimonial-heading-copy">Trusted by homeowners and businesses across Manhattan and New Jersey</p>
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+        <div class="mx-auto max-w-5xl text-center">
+            <div class="mb-3 flex items-center justify-center gap-4 text-brand-blue">
+                <span class="h-px w-20 bg-brand-blue/40 sm:w-40"></span>
+                <h2 class="text-[2.1rem] font-medium tracking-tight">Where We Service</h2>
+                <span class="h-px w-20 bg-brand-blue/40 sm:w-40"></span>
+            </div>
+            <p class="mb-12 text-lg text-slate-700">Manhattan, NY | Select counties in New Jersey</p>
+            <h3 class="text-4xl font-medium tracking-tight text-brand-blue">Our Service Area Promise</h3>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <article class="min-h-full rounded-[18px] border border-brand-line bg-white p-6 shadow-panel"><h3 class="mb-4 text-[1.15rem] font-medium leading-tight text-brand-blue">Prompt Response Times</h3><p class="text-lg leading-9 text-slate-700">We understand the urgency of appliance repairs. Our service areas are designed to ensure we can reach you quickly when you need us most.</p></article>
+            <article class="min-h-full rounded-[18px] border border-brand-line bg-white p-6 shadow-panel"><h3 class="mb-4 text-[1.15rem] font-medium leading-tight text-brand-blue">Local Expertise</h3><p class="text-lg leading-9 text-slate-700">Our technicians are familiar with the unique needs of Manhattan and New Jersey properties, from high-rise apartments to commercial kitchens.</p></article>
+            <article class="min-h-full rounded-[18px] border border-brand-line bg-white p-6 shadow-panel"><h3 class="mb-4 text-[1.15rem] font-medium leading-tight text-brand-blue">Scheduled Appointments</h3><p class="text-lg leading-9 text-slate-700">We respect your time with scheduled appointment windows and punctual arrivals, minimizing disruption to your day.</p></article>
+            <article class="min-h-full rounded-[18px] border border-brand-line bg-white p-6 shadow-panel"><h3 class="mb-4 text-[1.15rem] font-medium leading-tight text-brand-blue">Consistent Service Quality</h3><p class="text-lg leading-9 text-slate-700">Whether you're in Manhattan or New Jersey, you'll receive the same high-quality service and professionalism from our team.</p></article>
+        </div>
+    </div>
+</section>
+
+<section class="service-area-banner relative overflow-hidden">
+    <div class="service-area-banner-image" aria-hidden="true"></div>
+    <div class="relative z-[1] mx-auto flex min-h-[300px] w-full max-w-7xl flex-col items-center justify-center px-4 py-16 text-center text-white sm:px-6 lg:px-8">
+        <h2 class="mb-4 text-4xl font-normal tracking-tight sm:text-5xl">Outside Our Service Area?</h2>
+        <p class="max-w-5xl text-lg leading-8 text-white/95">We're always evaluating opportunities to expand our service coverage. If you're outside our current service area but need appliance repair, please contact us. We may be able to accommodate special requests or recommend a trusted partner in your area.</p>
+    </div>
+</section>
+
+<section class="bg-white px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+        <div class="mb-10 text-center">
+            <h2 class="mb-5 text-4xl font-medium tracking-tight text-brand-blue sm:text-5xl">What Our Clients Say</h2>
+            <p class="text-lg text-slate-700">Trusted by homeowners and businesses across Manhattan and New Jersey</p>
         </div>
         <div class="testimonial-slider" aria-label="Client feedback carousel">
-          <div class="testimonial-track">
-            <article class="testimonial-card testimonial-slide">
-            <blockquote>"Very professional service."</blockquote>
-            <p class="testimonial-author">M, Chris</p>
-            <p class="testimonial-source">Via HCP - 10/19/2025</p>
-            </article>
-            <article class="testimonial-card testimonial-slide">
-              <blockquote>"Excellent attention to detail and always go above and beyond."</blockquote>
-              <p class="testimonial-author">Stefanie Faris</p>
-              <p class="testimonial-source">Via Google - 11/04/2025</p>
-            </article>
-            <article class="testimonial-card testimonial-slide">
-            <blockquote>"They got a complicated job done."</blockquote>
-            <p class="testimonial-author">Lorenzo Bautista</p>
-            <p class="testimonial-source">Via Google - 11/21/2025</p>
-            </article>
-            <article class="testimonial-card testimonial-slide">
-              <blockquote>"Very professional service."</blockquote>
-              <p class="testimonial-author">M, Chris</p>
-              <p class="testimonial-source">Via HCP - 10/19/2025</p>
-            </article>
-            <article class="testimonial-card testimonial-slide">
-              <blockquote>"Excellent attention to detail and always go above and beyond."</blockquote>
-              <p class="testimonial-author">Stefanie Faris</p>
-              <p class="testimonial-source">Via Google - 11/04/2025</p>
-            </article>
-            <article class="testimonial-card testimonial-slide">
-              <blockquote>"They got a complicated job done."</blockquote>
-              <p class="testimonial-author">Lorenzo Bautista</p>
-              <p class="testimonial-source">Via Google - 11/21/2025</p>
-            </article>
-          </div>
-          <div class="testimonial-dots" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+            <div class="testimonial-track">
+                                                    <article class="testimonial-slide px-2 text-center">
+                    <blockquote class="mb-4 text-[1.5rem] font-semibold leading-tight text-slate-700">"Very professional service."</blockquote>
+                    <p class="mb-2 text-xl font-bold italic text-slate-600">M, Chris</p>
+                    <p class="text-lg italic text-slate-500">Via HCP - 10/19/2025</p>
+                </article>
+                                    <article class="testimonial-slide px-2 text-center">
+                    <blockquote class="mb-4 text-[1.5rem] font-semibold leading-tight text-slate-700">"Excellent attention to detail and always go above and beyond."</blockquote>
+                    <p class="mb-2 text-xl font-bold italic text-slate-600">Stefanie Faris</p>
+                    <p class="text-lg italic text-slate-500">Via Google - 11/04/2025</p>
+                </article>
+                                    <article class="testimonial-slide px-2 text-center">
+                    <blockquote class="mb-4 text-[1.5rem] font-semibold leading-tight text-slate-700">"They got a complicated job done."</blockquote>
+                    <p class="mb-2 text-xl font-bold italic text-slate-600">Lorenzo Bautista</p>
+                    <p class="text-lg italic text-slate-500">Via Google - 11/21/2025</p>
+                </article>
+                                                                        <article class="testimonial-slide px-2 text-center">
+                    <blockquote class="mb-4 text-[1.5rem] font-semibold leading-tight text-slate-700">"Very professional service."</blockquote>
+                    <p class="mb-2 text-xl font-bold italic text-slate-600">M, Chris</p>
+                    <p class="text-lg italic text-slate-500">Via HCP - 10/19/2025</p>
+                </article>
+                                    <article class="testimonial-slide px-2 text-center">
+                    <blockquote class="mb-4 text-[1.5rem] font-semibold leading-tight text-slate-700">"Excellent attention to detail and always go above and beyond."</blockquote>
+                    <p class="mb-2 text-xl font-bold italic text-slate-600">Stefanie Faris</p>
+                    <p class="text-lg italic text-slate-500">Via Google - 11/04/2025</p>
+                </article>
+                                    <article class="testimonial-slide px-2 text-center">
+                    <blockquote class="mb-4 text-[1.5rem] font-semibold leading-tight text-slate-700">"They got a complicated job done."</blockquote>
+                    <p class="mb-2 text-xl font-bold italic text-slate-600">Lorenzo Bautista</p>
+                    <p class="text-lg italic text-slate-500">Via Google - 11/21/2025</p>
+                </article>
+                                                </div>
+            <div class="testimonial-dots mt-8 flex justify-center gap-2" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section">
-      <div class="wrap">
-        <div class="cta-panel">
-          <div>
-            <p class="eyebrow">Schedule Service</p>
-            <h2>Ready to schedule appliance service?</h2>
-            <p>Book online or call our office to reserve a service appointment.</p>
-          </div>
-          <div class="cta-actions">
-            <a class="button button-primary" href="https://book.housecallpro.com/book/Manhattan-Appliance-LLC/782b6e8d55ed436e8acce1d4b8f2f33d?v2=true" target="_blank" rel="noreferrer">Book Online</a>
-            <a class="button button-secondary" href="tel:+19175220890">Call (917) 522-0890</a>
-          </div>
+    <section class="px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto w-full max-w-6xl rounded-[28px] border border-brand-line/35 bg-white px-8 py-10 shadow-panel">
+            <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                    <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Schedule Service</p>
+                    <h2 class="mb-3 text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Ready to schedule appliance service?</h2>
+                    <p class="max-w-2xl text-lg leading-8 text-slate-600">Book online or call our office to reserve a service appointment.</p>
+                </div>
+                <div class="flex flex-col gap-4 sm:flex-row">
+                    <a class="inline-flex items-center justify-center rounded-full bg-brand-teal px-7 py-3 text-base font-semibold text-white transition hover:brightness-95" href="https://book.housecallpro.com/book/Manhattan-Appliance-LLC/782b6e8d55ed436e8acce1d4b8f2f33d?v2=true" target="_blank" rel="noreferrer">Book Online</a>
+                    <a class="inline-flex items-center justify-center rounded-full border border-brand-line/50 bg-white px-7 py-3 text-base font-semibold text-brand-blue transition hover:border-brand-blue hover:bg-brand-soft" href="tel:+19175220890">Call (917) 522-0890</a>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-banner">
-      <div class="wrap">
-        <h2>Reliable Appliance Repair Starts Here</h2>
-      </div>
-    </div>
-    <div class="footer-main">
-      <div class="wrap footer-grid">
-        <div class="footer-brand">
-          <img src="/assets/images/logo.png" alt="Manhattan Appliance LLC logo">
+    </main>
+    <footer class="mt-0 bg-brand-soft">
+        <div class="bg-brand-navy py-12 text-center text-white sm:py-24">
+            <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+                <h2 class="mx-auto max-w-[280px] text-3xl font-normal leading-tight tracking-tight text-white sm:max-w-none sm:text-5xl">Reliable Appliance Repair Starts Here</h2>
+            </div>
         </div>
-        <div class="footer-column footer-contact">
-          <h3>Contact</h3>
-          <p><a href="tel:+19175220890">(917) 522-0890</a></p>
-          <p><a href="mailto:office@manhattanappliancellc.com">office@manhattanappliancellc.com</a></p>
+        <div class="bg-brand-soft py-12 sm:py-20">
+            <div class="mx-auto grid w-full max-w-7xl gap-10 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.15fr_1fr_1fr_0.7fr] lg:px-8">
+                <div class="flex justify-center sm:col-span-2 lg:col-span-1">
+                    <img class="w-32 sm:w-48" src="/assets/images/logo.png" alt="Manhattan Appliance LLC logo">
+                </div>
+                <div class="text-center">
+                    <h3 class="mb-4 text-xl font-medium text-brand-blue sm:text-2xl">Contact</h3>
+                    <p class="mb-1 text-[1rem] text-slate-700 sm:text-lg"><a class="text-brand-blue hover:underline" href="tel:+19175220890">(917) 522-0890</a></p>
+                    <p class="text-[1rem] text-slate-700 sm:text-lg"><a class="break-all text-brand-blue hover:underline sm:break-normal" href="mailto:office@manhattanappliancellc.com">office@manhattanappliancellc.com</a></p>
+                </div>
+                <div class="mx-auto w-full max-w-[280px] text-center sm:max-w-sm">
+                    <h3 class="mb-4 text-xl font-medium text-brand-blue sm:text-2xl">Opening Hours</h3>
+                    <div class="mb-1 flex items-center justify-between gap-10 text-[1rem] text-slate-700 sm:text-lg"><span>Mon - Fri</span><span>9:00 - 17:00</span></div>
+                    <div class="flex items-center justify-between gap-10 text-[1rem] text-slate-700 sm:text-lg"><span>Sat - Sun</span><span>Closed</span></div>
+                </div>
+                <div class="flex items-center justify-center sm:col-span-2 lg:col-span-1 lg:items-start lg:pt-12">
+                    <ul class="flex items-center gap-6 text-brand-blue">
+                        <li>
+                            <a class="inline-flex h-11 w-11 items-center justify-center rounded-full transition hover:bg-brand-blue/10" href="https://instagram.com/manhattanappliancellc" target="_blank" rel="noreferrer" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 1.8A3.7 3.7 0 0 0 3.8 7.5v9a3.7 3.7 0 0 0 3.7 3.7h9a3.7 3.7 0 0 0 3.7-3.7v-9a3.7 3.7 0 0 0-3.7-3.7h-9Zm9.65 1.35a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1ZM12 6.6A5.4 5.4 0 1 1 6.6 12 5.4 5.4 0 0 1 12 6.6Zm0 1.8A3.6 3.6 0 1 0 15.6 12 3.6 3.6 0 0 0 12 8.4Z"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="inline-flex h-11 w-11 items-center justify-center rounded-full transition hover:bg-brand-blue/10" href="https://facebook.com/Manhattan-Appliance-LLC-100066495584765/" target="_blank" rel="noreferrer" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" aria-hidden="true"><path d="M13.4 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.2-1.5 1.5-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.3v2.1H7.3V13h2.6v8h3.5Z"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="inline-flex h-11 w-11 items-center justify-center rounded-full transition hover:bg-brand-blue/10" href="https://linkedin.com/manhattan-appliance-llc" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" aria-hidden="true"><path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3A1.97 1.97 0 1 0 5.3 6.94 1.97 1.97 0 0 0 5.25 3ZM20.44 12.9c0-3.46-1.84-5.07-4.3-5.07a3.73 3.73 0 0 0-3.36 1.85V8.5H9.4c.04.78 0 11.5 0 11.5h3.38v-6.42c0-.34.02-.68.13-.92a2.22 2.22 0 0 1 2.08-1.48c1.47 0 2.06 1.12 2.06 2.76V20h3.39v-7.1Z"/></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="footer-column footer-hours">
-          <h3>Opening Hours</h3>
-          <div class="hours-row"><span>Mon - Fri</span><span>9:00 - 17:00</span></div>
-          <div class="hours-row"><span>Sat - Sun</span><span>Closed</span></div>
+        <div class="relative bg-black py-5 text-center text-white/85">
+            <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+                <p class="text-[0.75rem] sm:text-base">&copy; 2026 All Rights Reserved | Manhattan Appliance LLC</p>
+            </div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="absolute right-4 top-1/2 -translate-y-1/2 rounded bg-slate-800 p-2 text-white transition hover:bg-slate-700 sm:right-8" aria-label="Scroll to top">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                </svg>
+            </button>
         </div>
-        <div class="footer-column footer-social">
-          <ul class="social-list footer-social-list">
-            <li><a href="https://instagram.com/manhattanappliancellc" target="_blank" rel="noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 1.8A3.7 3.7 0 0 0 3.8 7.5v9a3.7 3.7 0 0 0 3.7 3.7h9a3.7 3.7 0 0 0 3.7-3.7v-9a3.7 3.7 0 0 0-3.7-3.7h-9Zm9.65 1.35a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1ZM12 6.6A5.4 5.4 0 1 1 6.6 12 5.4 5.4 0 0 1 12 6.6Zm0 1.8A3.6 3.6 0 1 0 15.6 12 3.6 3.6 0 0 0 12 8.4Z"/></svg></a></li>
-            <li><a href="https://facebook.com/Manhattan-Appliance-LLC-100066495584765/" target="_blank" rel="noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M13.4 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.2-1.5 1.5-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.3v2.1H7.3V13h2.6v8h3.5Z"/></svg></a></li>
-            <li><a href="https://linkedin.com/manhattan-appliance-llc" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3A1.97 1.97 0 1 0 5.3 6.94 1.97 1.97 0 0 0 5.25 3ZM20.44 12.9c0-3.46-1.84-5.07-4.3-5.07a3.73 3.73 0 0 0-3.36 1.85V8.5H9.4c.04.78 0 11.5 0 11.5h3.38v-6.42c0-.34.02-.68.13-.92a2.22 2.22 0 0 1 2.08-1.48c1.47 0 2.06 1.12 2.06 2.76V20h3.39v-7.1Z"/></svg></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="wrap footer-bottom-inner" style="display: flex; justify-content: center; align-items: center; position: relative;">
-        <p>&copy; 2026 All Rights Reserved | Manhattan Appliance LLC</p>
-        <button type="button" class="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Scroll to top" style="position: absolute; right: 0; background: #333; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-        </button>
-      </div>
-    </div>
-  </footer>
+    </footer>
 </div>
 </body>
 </html>

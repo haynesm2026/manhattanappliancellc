@@ -17,6 +17,12 @@ $routes = [
     '/contact' => '/contact.php',
     '/brands-we-service' => '/brands-we-service.php',
     '/faqs' => '/faqs.php',
+    '/lead-request' => '/lead-request.php',
+    '/appliance-repair-manhattan' => '/appliance-repair-manhattan.php',
+    '/appliance-repair-new-jersey' => '/appliance-repair-new-jersey.php',
+    '/sub-zero-repair-nyc' => '/sub-zero-repair-nyc.php',
+    '/miele-repair-nyc' => '/miele-repair-nyc.php',
+    '/viking-repair-nyc' => '/viking-repair-nyc.php',
 ];
 
 if (isset($routes[$path])) {

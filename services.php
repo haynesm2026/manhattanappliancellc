@@ -15,6 +15,13 @@ $services = [
     ['title' => 'Commercial & Specialty', 'image' => 'assets/images/service-commercial.jpg', 'items' => ['Deep fryer repairs', 'Salamander broiler repairs']],
 ];
 
+$landingLinks = [
+    ['href' => '/sub-zero-repair-nyc', 'title' => 'Sub-Zero Repair NYC', 'copy' => 'Brand-led page built for premium refrigeration search traffic in Manhattan.'],
+    ['href' => '/miele-repair-nyc', 'title' => 'Miele Repair NYC', 'copy' => 'Focused page for Miele dish care, laundry, and cooking appliance repair.'],
+    ['href' => '/viking-repair-nyc', 'title' => 'Viking Repair NYC', 'copy' => 'Dedicated page for Viking cooking and refrigeration repair calls.'],
+    ['href' => '/appliance-repair-manhattan', 'title' => 'Appliance Repair Manhattan', 'copy' => 'General Manhattan service page for high-intent calls and online booking.'],
+];
+
 render_header($page, $site, $navItems);
 ?>
 <section class="px-4 py-16 sm:px-6 lg:px-8">
@@ -90,6 +97,25 @@ render_header($page, $site, $navItems);
         <h2 class="mb-4 text-3xl font-semibold tracking-tight sm:text-4xl">Commercial Appliance Repair Services</h2>
         <p class="text-lg leading-8 text-white/85">We service dish machines, insinkerators, fryers, grills, ranges, and commercial refrigerators. We also provide recurring service and monthly cleaning for ABS pharmacy refrigerators and other temperature-sensitive commercial units.</p>
         <p class="mt-4 text-lg leading-8 text-white/85">All services are available across Manhattan, NY and select counties in New Jersey.</p>
+    </div>
+</section>
+
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+        <div class="mb-8 max-w-4xl">
+            <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">PPC + SEO Pages</p>
+            <h2 class="text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">Service pages built for tighter search intent.</h2>
+            <p class="mt-4 text-lg leading-8 text-slate-600">Instead of sending every visitor to the homepage, these focused pages match specific services and brand searches more directly.</p>
+        </div>
+        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <?php foreach ($landingLinks as $link): ?>
+                <a class="rounded-[24px] border border-brand-line bg-white p-6 shadow-panel transition hover:-translate-y-1 hover:border-brand-blue/40" href="<?= htmlspecialchars($link['href']) ?>">
+                    <p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Open Page</p>
+                    <h3 class="mt-3 text-2xl font-semibold tracking-tight text-brand-ink"><?= htmlspecialchars($link['title']) ?></h3>
+                    <p class="mt-3 text-base leading-7 text-slate-600"><?= htmlspecialchars($link['copy']) ?></p>
+                </a>
+            <?php endforeach; ?>
+        </div>
     </div>
 </section>
 

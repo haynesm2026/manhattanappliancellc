@@ -16,6 +16,14 @@ $faqs = [
     ['q' => 'Do you offer a service guarantee?', 'a' => 'Yes. Completed repairs are covered by a 90-day warranty on parts and labor.'],
 ];
 
+$landingLinks = [
+    ['href' => '/appliance-repair-manhattan', 'title' => 'Appliance Repair Manhattan'],
+    ['href' => '/appliance-repair-new-jersey', 'title' => 'Appliance Repair New Jersey'],
+    ['href' => '/sub-zero-repair-nyc', 'title' => 'Sub-Zero Repair NYC'],
+    ['href' => '/miele-repair-nyc', 'title' => 'Miele Repair NYC'],
+    ['href' => '/viking-repair-nyc', 'title' => 'Viking Repair NYC'],
+];
+
 render_header($page, $site, $navItems);
 ?>
 <section class="px-4 py-16 sm:px-6 lg:px-8">
@@ -53,6 +61,20 @@ render_header($page, $site, $navItems);
                 <li>Upfront pricing before work begins</li>
                 <li>90-day warranty on completed repairs</li>
             </ul>
+        </div>
+    </div>
+</section>
+
+<section class="px-4 pb-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl rounded-[28px] border border-brand-line bg-brand-soft/50 p-8 shadow-panel">
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Search-Focused Pages</p>
+        <h2 class="text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Pages created for service + location and brand + location searches.</h2>
+        <div class="mt-6 flex flex-wrap gap-3">
+            <?php foreach ($landingLinks as $link): ?>
+                <a class="inline-flex items-center rounded-full border border-brand-line bg-white px-5 py-3 text-sm font-semibold text-brand-blue transition hover:border-brand-blue/40 hover:bg-brand-soft" href="<?= htmlspecialchars($link['href']) ?>">
+                    <?= htmlspecialchars($link['title']) ?>
+                </a>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
