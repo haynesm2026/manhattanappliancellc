@@ -16,71 +16,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install SSH deploy tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
+      # 1. Install sshpass to allow password-based rsync
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Setup SSH known_hosts
-        env:
-          SSH_HOST: ${{ secrets.FTP_HOST }}
-          SSH_PORT: ${{ secrets.FTP_PORT }}
+      # 2. Add IONOS to known_hosts to prevent the "Are you sure you want to continue connecting?" prompt
+      - name: Add IONOS to known_hosts
         run: |
-          test -n "$SSH_HOST" || (echo "::error::Missing FTP_HOST secret" && exit 1)
-          test -n "$SSH_PORT" || (echo "::error::Missing FTP_PORT secret" && exit 1)
-
           mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-
-      - name: Test SSH authentication
-        env:
-          SSHPASS: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          test -n "$SSHPASS" || (echo "::error::Missing FTP_PASSWORD secret" && exit 1)
-
-          sshpass -e ssh -p ${{ secrets.FTP_PORT }} \
-            -o PreferredAuthentications=password \
-            -o PubkeyAuthentication=no \
-            -o StrictHostKeyChecking=yes \
-            ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_HOST }} "echo 'SSH OK'"
+          ssh-keyscan -p ${{ secrets.FTP_PORT }} ${{ secrets.FTP_HOST }} >> ~/.ssh/known_hosts
 
       - name: Lint PHP entry files
         run: |
-          php -l index.php
-          php -l includes/site.php
-          php -l services.php
-          php -l clients.php
-          php -l service-areas.php
-          php -l why-manhattan-appliance.php
-          php -l resources.php
-          php -l contact.php
-          php -l brands-we-service.php
-          php -l faqs.php
-          php -l lead-request.php
-          php -l appliance-repair-manhattan.php
-          php -l appliance-repair-new-jersey.php
-          php -l sub-zero-repair-nyc.php
-          php -l miele-repair-nyc.php
-          php -l viking-repair-nyc.php
+          for file in index.php includes/site.php services.php clients.php service-areas.php why-manhattan-appliance.php resources.php contact.php brands-we-service.php faqs.php lead-request.php appliance-repair-manhattan.php appliance-repair-new-jersey.php sub-zero-repair-nyc.php miele-repair-nyc.php viking-repair-nyc.php; do
+            php -l "$file"
+          done
 
       - name: Refresh static homepage fallback
         run: php index.php > index.html
 
-      - name: Check deploy secrets
-        run: |
-          test -n "${{ secrets.FTP_HOST }}" || (echo "::error::Missing FTP_HOST secret" && exit 1)
-          test -n "${{ secrets.FTP_PORT }}" || (echo "::error::Missing FTP_PORT secret" && exit 1)
-          test -n "${{ secrets.FTP_USERNAME }}" || (echo "::error::Missing FTP_USERNAME secret" && exit 1)
-          test -n "${{ secrets.FTP_PASSWORD }}" || (echo "::error::Missing FTP_PASSWORD secret" && exit 1)
-          test -n "${{ secrets.FTP_REMOTE_DIR }}" || (echo "::error::Missing FTP_REMOTE_DIR secret" && exit 1)
-
+      # 3. Deploy using rsync + sshpass
       - name: Deploy files using rsync over SSH
         env:
-          SSHPASS: ${{ secrets.FTP_PASSWORD }}
+          # Passes the password securely to sshpass without exposing it in the command logs
+          SSHPASS: ${{ secrets.SSH_PASSWORD }}
         run: |
-          sshpass -e rsync -e "ssh -p ${{ secrets.FTP_PORT }} -o PreferredAuthentications=password -o PubkeyAuthentication=no -o StrictHostKeyChecking=yes" -avz --delete --delete-excluded \
+          sshpass -e rsync -e "ssh -p ${{ secrets.FTP_PORT }}" -avz --delete --delete-excluded \
           --exclude='.DS_Store' \
           --exclude='.git/' \
           --exclude='.gitignore' \
@@ -93,7 +54,7 @@ jobs:
           --exclude='logs/' \
           --exclude='*.md' \
           --exclude='.*.md' \
-          ./ ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_HOST }}:${{ secrets.FTP_REMOTE_DIR }}
+          ./ ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_HOST }}:${{ secrets.SSH_REMOTE_DIR }}
 
       - name: Verify homepage responds
         run: |
