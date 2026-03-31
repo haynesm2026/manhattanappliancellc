@@ -57,7 +57,7 @@ jobs:
           SSHPASS: ${{ secrets.FTP_PASSWORD }}
           SSH_PORT: ${{ secrets.FTP_PORT || '22' }}
         run: |
-          sshpass -e rsync -e "ssh -p $SSH_PORT -o PreferredAuthentications=password -o PubkeyAuthentication=no -o StrictHostKeyChecking=yes" -avz --delete --delete-excluded \
+          sshpass -e rsync -e "ssh -p $SSH_PORT -o PreferredAuthentications=password -o PubkeyAuthentication=no -o StrictHostKeyChecking=yes" -rvz --delete --delete-excluded --omit-dir-times --no-times --no-perms --no-owner --no-group \
           --exclude='.DS_Store' \
           --exclude='.git/' \
           --exclude='.gitignore' \
