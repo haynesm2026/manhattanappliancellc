@@ -22,9 +22,13 @@ jobs:
 
       # 2. Add IONOS to known_hosts to prevent the "Are you sure you want to continue connecting?" prompt
       - name: Add IONOS to known_hosts
+        env:
+          SSH_PORT: ${{ secrets.FTP_PORT || '22' }}
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -p ${{ secrets.FTP_PORT }} ${{ secrets.FTP_HOST }} >> ~/.ssh/known_hosts
+          chmod 700 ~/.ssh
+          ssh-keyscan -p "$SSH_PORT" ${{ secrets.FTP_HOST }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
 
       - name: Lint PHP entry files
         run: |
@@ -36,12 +40,24 @@ jobs:
         run: php index.php > index.html
 
       # 3. Deploy using rsync + sshpass
+      - name: Test SSH login
+        env:
+          SSHPASS: ${{ secrets.FTP_PASSWORD }}
+          SSH_PORT: ${{ secrets.FTP_PORT || '22' }}
+        run: |
+          sshpass -e ssh -p "$SSH_PORT" \
+            -o PreferredAuthentications=password \
+            -o PubkeyAuthentication=no \
+            -o StrictHostKeyChecking=yes \
+            ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_HOST }} "echo 'SSH OK'"
+
       - name: Deploy files using rsync over SSH
         env:
           # Passes the password securely to sshpass without exposing it in the command logs
-          SSHPASS: ${{ secrets.SSH_PASSWORD }}
+          SSHPASS: ${{ secrets.FTP_PASSWORD }}
+          SSH_PORT: ${{ secrets.FTP_PORT || '22' }}
         run: |
-          sshpass -e rsync -e "ssh -p ${{ secrets.FTP_PORT }}" -avz --delete --delete-excluded \
+          sshpass -e rsync -e "ssh -p $SSH_PORT -o PreferredAuthentications=password -o PubkeyAuthentication=no -o StrictHostKeyChecking=yes" -avz --delete --delete-excluded \
           --exclude='.DS_Store' \
           --exclude='.git/' \
           --exclude='.gitignore' \
@@ -54,7 +70,7 @@ jobs:
           --exclude='logs/' \
           --exclude='*.md' \
           --exclude='.*.md' \
-          ./ ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_HOST }}:${{ secrets.SSH_REMOTE_DIR }}
+          ./ ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_HOST }}:${{ secrets.FTP_REMOTE_DIR }}
 
       - name: Verify homepage responds
         run: |
