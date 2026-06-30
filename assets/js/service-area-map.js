@@ -1,39 +1,19 @@
 (() => {
-    const serviceZips = new Set(window.MANHATTAN_APPLIANCE_SERVICE_ZIPS || []);
     const manhattanZipPrefix = '10';
-    const zipAreaNames = {
-        '10010': 'Gramercy Park / Murray Hill',
-        '10016': 'Gramercy Park / Murray Hill',
-        '10017': 'Gramercy Park / Murray Hill',
-        '10022': 'Gramercy Park / Murray Hill',
-        '10012': 'Greenwich Village / SoHo',
-        '10013': 'Greenwich Village / SoHo',
-        '10014': 'Greenwich Village / SoHo',
-        '10004': 'Lower Manhattan',
-        '10005': 'Lower Manhattan',
-        '10006': 'Lower Manhattan',
-        '10007': 'Lower Manhattan',
-        '10038': 'Lower Manhattan',
-        '10280': 'Lower Manhattan',
-        '10002': 'Lower East Side',
-        '10003': 'Lower East Side / East Village',
-        '10009': 'Lower East Side / East Village',
-        '10021': 'Upper East Side',
-        '10028': 'Upper East Side',
-        '10044': 'Upper East Side / Roosevelt Island',
-        '10065': 'Upper East Side',
-        '10075': 'Upper East Side',
-        '10128': 'Upper East Side',
-        '10023': 'Upper West Side',
-        '10024': 'Upper West Side',
-        '10025': 'Upper West Side',
-        '10001': 'Chelsea / Clinton',
-        '10011': 'Chelsea / Clinton',
-        '10018': 'Chelsea / Clinton',
-        '10019': 'Chelsea / Clinton',
-        '10020': 'Chelsea / Clinton',
-        '10036': 'Chelsea / Clinton'
-    };
+    let zipAreaNames = {};
+
+    async function getServiceAreaData() {
+        if (window.MANHATTAN_APPLIANCE_SERVICE_AREA_DATA) {
+            return window.MANHATTAN_APPLIANCE_SERVICE_AREA_DATA;
+        }
+
+        const response = await fetch('/assets/data/service-areas.json');
+        if (!response.ok) {
+            throw new Error(`Failed to load service area data (${response.status})`);
+        }
+
+        return response.json();
+    }
 
     function isManhattanZip(zip) {
         return String(zip || '').startsWith(manhattanZipPrefix);
@@ -44,7 +24,7 @@
             return zipAreaNames[zip];
         }
 
-        return isManhattanZip(zip) ? 'Manhattan Service Area' : 'New Jersey Service Area';
+        return `ZIP ${zip}`;
     }
 
     function baseStyle(zip) {
@@ -103,104 +83,119 @@
     async function initServiceAreaMap() {
         const mapNode = document.querySelector('[data-service-area-map]');
 
-        if (!mapNode || typeof window.L === 'undefined' || mapNode.dataset.mapBound === 'true') {
+        if (!mapNode || typeof window.L === 'undefined' || mapNode.dataset.mapBound === 'true' || mapNode.dataset.mapBound === 'loading') {
             return;
         }
 
-        const map = window.L.map(mapNode, {
-            scrollWheelZoom: true,
-            zoomControl: true
-        }).setView([40.7831, -73.9712], 11);
+        mapNode.dataset.mapBound = 'loading';
 
-        map.scrollWheelZoom.enable();
-        map.dragging.enable();
-        map.doubleClickZoom.enable();
-        map.touchZoom.enable();
-        map.boxZoom.enable();
-        map.keyboard.enable();
+        try {
+            const serviceAreaData = await getServiceAreaData();
+            const serviceZips = new Set(serviceAreaData.service_zips || []);
+            zipAreaNames = serviceAreaData.zip_area_names || {};
 
-        window.L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-            maxZoom: 18,
-            attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-        }).addTo(map);
+            const map = window.L.map(mapNode, {
+                scrollWheelZoom: true,
+                zoomControl: true
+            }).setView([40.7831, -73.9712], 11);
 
-        const response = await fetch('/assets/data/service-zips.geojson');
-        const geojson = await response.json();
+            map.scrollWheelZoom.enable();
+            map.dragging.enable();
+            map.doubleClickZoom.enable();
+            map.touchZoom.enable();
+            map.boxZoom.enable();
+            map.keyboard.enable();
 
-        const manhattanFeatures = geojson.features.filter((feature) => {
-            const zip = feature?.properties?.ZCTA5CE10;
-            return serviceZips.has(zip) && isManhattanZip(zip);
-        });
+            window.L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+                maxZoom: 18,
+                attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+            }).addTo(map);
 
-        const newJerseyFeatures = geojson.features.filter((feature) => {
-            const zip = feature?.properties?.ZCTA5CE10;
-            return serviceZips.has(zip) && !isManhattanZip(zip);
-        });
+            const response = await fetch('/assets/data/service-zips.geojson');
+            const geojson = await response.json();
 
-        const labeledLayers = [];
+            const manhattanFeatures = geojson.features.filter((feature) => {
+                const zip = feature?.properties?.ZCTA5CE10;
+                return serviceZips.has(zip) && isManhattanZip(zip);
+            });
 
-        const makeLayer = (features) => window.L.geoJSON(
-            { type: 'FeatureCollection', features },
-            {
-                style(feature) {
-                    return baseStyle(feature.properties.ZCTA5CE10);
-                },
-                onEachFeature(feature, layer) {
-                    const zip = feature.properties.ZCTA5CE10;
-                    const areaName = getAreaName(zip);
-                    const hasNamedRegion = Boolean(zipAreaNames[zip]);
-                    const label = `<strong>${areaName}</strong><br>ZIP ${zip}`;
+            const newJerseyFeatures = geojson.features.filter((feature) => {
+                const zip = feature?.properties?.ZCTA5CE10;
+                return serviceZips.has(zip) && !isManhattanZip(zip);
+            });
 
-                    layer.bindTooltip(label, {
-                        sticky: !hasNamedRegion,
-                        direction: 'top',
-                        opacity: 0.96,
-                        permanent: false,
-                        className: 'service-area-map-label'
-                    });
+            const labeledLayers = [];
 
-                    labeledLayers.push({ layer, hasNamedRegion });
+            const makeLayer = (features) => window.L.geoJSON(
+                { type: 'FeatureCollection', features },
+                {
+                    style(feature) {
+                        return baseStyle(feature.properties.ZCTA5CE10);
+                    },
+                    onEachFeature(feature, layer) {
+                        const zip = feature.properties.ZCTA5CE10;
+                        const areaName = getAreaName(zip);
+                        const hasNamedRegion = Boolean(zipAreaNames[zip]);
+                        const label = `<strong>${areaName}</strong><br>ZIP ${zip}`;
 
-                    layer.on('mouseover', () => {
-                        layer.setStyle(hoverStyle(zip));
-                        layer.bringToFront();
-                        layer.openTooltip();
-                    });
+                        layer.bindTooltip(label, {
+                            sticky: !hasNamedRegion,
+                            direction: 'top',
+                            opacity: 0.96,
+                            permanent: false,
+                            className: 'service-area-map-label'
+                        });
 
-                    layer.on('mouseout', () => {
-                        layer.setStyle(baseStyle(zip));
-                        if (map.getZoom() < 12.5 || !hasNamedRegion) {
-                            layer.closeTooltip();
-                        }
-                    });
+                        labeledLayers.push({ layer, hasNamedRegion });
 
-                    layer.on('click', () => {
-                        layer.setStyle(hoverStyle(zip));
-                        layer.openTooltip();
-                    });
+                        layer.on('mouseover', () => {
+                            layer.setStyle(hoverStyle(zip));
+                            layer.bringToFront();
+                            layer.openTooltip();
+                        });
+
+                        layer.on('mouseout', () => {
+                            layer.setStyle(baseStyle(zip));
+                            if (map.getZoom() < 12.5 || !hasNamedRegion) {
+                                layer.closeTooltip();
+                            }
+                        });
+
+                        layer.on('click', () => {
+                            layer.setStyle(hoverStyle(zip));
+                            layer.openTooltip();
+                        });
+                    }
                 }
+            );
+
+            const manhattanLayer = makeLayer(manhattanFeatures).addTo(map);
+            const newJerseyLayer = makeLayer(newJerseyFeatures).addTo(map);
+
+            const manhattanBounds = manhattanLayer.getBounds();
+            if (manhattanBounds.isValid()) {
+                map.fitBounds(manhattanBounds.pad(0.08));
             }
-        );
 
-        const manhattanLayer = makeLayer(manhattanFeatures).addTo(map);
-        const newJerseyLayer = makeLayer(newJerseyFeatures).addTo(map);
+            map.on('zoomend', () => updateZoomLabels(map, labeledLayers));
+            updateZoomLabels(map, labeledLayers);
 
-        const manhattanBounds = manhattanLayer.getBounds();
-        if (manhattanBounds.isValid()) {
-            map.fitBounds(manhattanBounds.pad(0.08));
+            mapNode.dataset.mapBound = 'true';
+        } catch (error) {
+            delete mapNode.dataset.mapBound;
+            throw error;
         }
-
-        map.on('zoomend', () => updateZoomLabels(map, labeledLayers));
-        updateZoomLabels(map, labeledLayers);
-
-        mapNode.dataset.mapBound = 'true';
     }
+
+    const boot = () => {
+        initServiceAreaMap().catch((error) => console.error(error));
+    };
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initServiceAreaMap);
+        document.addEventListener('DOMContentLoaded', boot);
     } else {
-        initServiceAreaMap();
+        boot();
     }
 
-    window.addEventListener('pageshow', initServiceAreaMap);
+    window.addEventListener('pageshow', boot);
 })();

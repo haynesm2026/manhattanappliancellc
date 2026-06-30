@@ -1,6 +1,15 @@
 <?php
 require __DIR__ . '/includes/site.php';
 
+$serviceAreaDataPath = __DIR__ . '/assets/data/service-areas.json';
+$serviceAreaData = is_readable($serviceAreaDataPath)
+    ? json_decode((string) file_get_contents($serviceAreaDataPath), true)
+    : [];
+
+if (!is_array($serviceAreaData)) {
+    $serviceAreaData = [];
+}
+
 $page = [
     'slug' => 'service-areas',
     'title' => 'Service Areas',
@@ -8,8 +17,8 @@ $page = [
     'head' => '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">'
 ];
 
-$manhattan = ['Upper East Side', 'Upper West Side', 'Midtown', 'Chelsea', 'Greenwich Village', 'SoHo', 'Tribeca', 'Financial District', 'Lower East Side', 'East Village', 'Harlem', 'Washington Heights', 'Inwood', 'Murray Hill', 'Gramercy Park', "Hell's Kitchen", 'Battery Park City'];
-$nj = ['Bergen County', 'Hudson County', 'Essex County', 'Passaic County (select areas)', 'Union County (select areas)'];
+$manhattan = $serviceAreaData['manhattan_areas'] ?? ['Upper East Side', 'Upper West Side', 'Midtown', 'Chelsea', 'Greenwich Village', 'SoHo', 'Tribeca', 'Financial District', 'Lower East Side', 'East Village', 'Harlem', 'Washington Heights', 'Inwood', 'Murray Hill', 'Gramercy Park', "Hell's Kitchen", 'Battery Park City'];
+$nj = $serviceAreaData['new_jersey_areas'] ?? ['Bergen County', 'Hudson County', 'Essex County', 'Passaic County (select areas)', 'Union County (select areas)'];
 
 render_header($page, $site, $navItems);
 ?>

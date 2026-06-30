@@ -7,7 +7,7 @@ $site = [
     'email' => 'office@manhattanappliancellc.com',
     'email_href' => 'mailto:office@manhattanappliancellc.com',
     'book_url' => 'https://book.housecallpro.com/book/Manhattan-Appliance-LLC/782b6e8d55ed436e8acce1d4b8f2f33d?v2=true',
-    'zip_url' => 'https://cdn.website-editor.net/s/009be738e154491f973774d06a36aa24/uploads/files/service-area.pdf',
+    'service_areas_url' => '/service-areas',
     'socials' => [
         'Instagram' => 'https://instagram.com/manhattanappliancellc',
         'Facebook' => 'https://facebook.com/Manhattan-Appliance-LLC-100066495584765/',

@@ -70,7 +70,7 @@ render_header($page, $site, $navItems);
             <p class="mx-auto max-w-4xl text-[0.95rem] font-medium leading-8 text-white/90 sm:text-lg">Residential and commercial appliance repair in Manhattan and New Jersey counties, delivered by licensed, certified experts.</p>
             <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-8 sm:flex-row sm:gap-4">
                 <a class="inline-flex min-w-[184px] items-center justify-center rounded-full bg-brand-teal px-8 py-3 text-base font-semibold text-white shadow-lg transition hover:brightness-95" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
-                <a class="inline-flex min-w-[184px] items-center justify-center rounded-full border border-white/25 bg-white px-8 py-3 text-base font-semibold text-brand-blue shadow-lg transition hover:bg-brand-soft" href="<?= htmlspecialchars($site['zip_url']) ?>" target="_blank" rel="noreferrer">Zip Codes We Service</a>
+                <a class="inline-flex min-w-[184px] items-center justify-center rounded-full border border-white/25 bg-white px-8 py-3 text-base font-semibold text-brand-blue shadow-lg transition hover:bg-brand-soft" href="<?= htmlspecialchars($site['service_areas_url']) ?>">View Service Areas</a>
             </div>
         </div>
     </div>
