@@ -5,7 +5,19 @@ if (!isset($landing, $page)) {
 }
 
 $leadStatus = $_GET['lead'] ?? '';
+$leadReason = $_GET['reason'] ?? '';
 $returnPath = '/' . $landing['slug'];
+
+$leadErrorMessages = [
+    'missing_contact' => 'Please include your name and phone number so we can reach you.',
+    'invalid_zip' => 'Please enter a valid 5-digit ZIP code if you want to include one.',
+    'storage_failed' => 'We could not save your request just now. Please call or email us and we will help right away.',
+    'invalid_return' => 'We could not return you to the requested page. Please use the contact details below.',
+    'bad_method' => 'This request could not be submitted from that link. Please use the form on this page.',
+];
+
+$leadSuccessMessage = 'Request received. For the fastest scheduling, you can also call now or continue to online booking.';
+$leadErrorMessage = $leadErrorMessages[$leadReason] ?? 'We could not send your request just now. Please try again or call us directly.';
 
 $relatedLabels = [
     'appliance-repair-manhattan' => 'Appliance Repair Manhattan',
@@ -44,11 +56,11 @@ render_header($page, $site, $navItems);
             <p class="mt-3 text-base leading-7 text-slate-600">Short form for fast follow-up. Your request is captured directly on the site so the office can follow up quickly.</p>
             <?php if ($leadStatus === 'success'): ?>
                 <div class="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm leading-6 text-emerald-800" data-conversion-page-success="<?= htmlspecialchars($landing['slug']) ?>">
-                    Request received. For the fastest scheduling, you can also call now or continue to online booking.
+                    <?= htmlspecialchars($leadSuccessMessage) ?>
                 </div>
             <?php elseif ($leadStatus === 'error'): ?>
                 <div class="mt-5 rounded-2xl border border-rose-200 bg-rose-50 px-5 py-4 text-sm leading-6 text-rose-800">
-                    Please enter at least your name and phone number so we can follow up.
+                    <?= htmlspecialchars($leadErrorMessage) ?>
                 </div>
             <?php endif; ?>
             <form class="mt-6 space-y-4" method="post" action="/lead-request" data-lead-form data-lead-service="<?= htmlspecialchars($landing['title']) ?>" data-conversion-page="<?= htmlspecialchars($landing['slug']) ?>">

@@ -84,6 +84,7 @@ function render_header(array $page, array $site, array $navItems): void
         .hero-slideshow,
         .hero-slide,
         .hero-slideshow::after,
+        .hero-section,
         .service-area-banner-image,
         .service-area-banner-image::after {
             position: absolute;
@@ -113,9 +114,16 @@ function render_header(array $page, array $site, array $navItems): void
             animation-delay: 12s;
         }
 
+        .hero-section {
+            background-color: #1F3A44;
+            background-image: linear-gradient(180deg, rgba(31, 58, 68, 0.58), rgba(31, 58, 68, 0.78)), url("<?= asset_url('assets/images/GB+Domestic+Appliance+Repairs-011.jpg') ?>");
+            background-position: center;
+            background-size: cover;
+        }
+
         .hero-slideshow::after {
             content: "";
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.68));
+            background: linear-gradient(180deg, rgba(31, 58, 68, 0.22), rgba(31, 58, 68, 0.48));
         }
 
         .testimonial-slider {
@@ -234,6 +242,15 @@ function render_header(array $page, array $site, array $navItems): void
             <div class="mx-auto flex w-full max-w-7xl justify-center">
                 <a class="inline-flex min-w-[180px] items-center justify-center rounded-full bg-brand-teal px-7 py-3 text-base font-semibold text-white transition hover:brightness-95" href="<?= htmlspecialchars($site['book_url']) ?>" target="_blank" rel="noreferrer">Book Online</a>
             </div>
+        </div>
+        <div class="border-t border-brand-line/35 bg-brand-soft/95 lg:hidden">
+            <nav class="mx-auto flex w-full max-w-7xl gap-2 overflow-x-auto px-4 py-3 sm:px-6" aria-label="Mobile quick links">
+                <?php foreach ($navItems as $slug => $item): ?>
+                    <a class="shrink-0 rounded-full border border-brand-line bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-brand-blue/40 hover:text-brand-blue" href="<?= htmlspecialchars($item['href']) ?>">
+                        <?= htmlspecialchars($item['label']) ?>
+                    </a>
+                <?php endforeach; ?>
+            </nav>
         </div>
         <div class="border-t border-brand-line/35 bg-brand-soft/95 backdrop-blur">
             <div class="mx-auto hidden w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:flex lg:px-8">

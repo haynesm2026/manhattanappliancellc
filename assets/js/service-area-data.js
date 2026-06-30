@@ -2,6 +2,7 @@
     const dataUrl = '/assets/data/service-areas.json';
 
     if (!window.MANHATTAN_APPLIANCE_SERVICE_AREA_DATA) {
+        window.MANHATTAN_APPLIANCE_SERVICE_AREA_ERROR = null;
         window.MANHATTAN_APPLIANCE_SERVICE_AREA_DATA = fetch(dataUrl)
             .then((response) => {
                 if (!response.ok) {
@@ -16,6 +17,7 @@
             })
             .catch((error) => {
                 console.error(error);
+                window.MANHATTAN_APPLIANCE_SERVICE_AREA_ERROR = error;
                 const fallback = {
                     service_zips: [],
                     zip_area_names: {},

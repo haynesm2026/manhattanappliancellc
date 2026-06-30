@@ -1,8 +1,8 @@
 <?php
 
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
-    http_response_code(405);
-    exit('Method Not Allowed');
+    header('Location: /contact?lead=error&reason=bad_method');
+    exit;
 }
 
 $name = trim((string) ($_POST['name'] ?? ''));
@@ -14,41 +14,68 @@ $pageSlug = trim((string) ($_POST['page_slug'] ?? ''));
 $returnPath = trim((string) ($_POST['return_path'] ?? '/'));
 
 if ($returnPath === '' || $returnPath[0] !== '/') {
-    $returnPath = '/';
+    $returnPath = '/contact';
+}
+
+function redirect_with_status(string $path, string $lead, ?string $reason = null): void
+{
+    $separator = strpos($path, '?') === false ? '?' : '&';
+    $query = ['lead' => $lead];
+
+    if ($reason !== null && $reason !== '') {
+        $query['reason'] = $reason;
+    }
+
+    header('Location: ' . $path . $separator . http_build_query($query));
+    exit;
 }
 
 if ($name === '' || $phone === '') {
-    header('Location: ' . $returnPath . '?lead=error');
-    exit;
+    redirect_with_status($returnPath, 'error', 'missing_contact');
+}
+
+if ($zip !== '' && !preg_match('/^\d{5}$/', $zip)) {
+    redirect_with_status($returnPath, 'error', 'invalid_zip');
 }
 
 $logsDir = __DIR__ . '/logs';
 if (!is_dir($logsDir)) {
-    mkdir($logsDir, 0775, true);
+    if (!mkdir($logsDir, 0775, true) && !is_dir($logsDir)) {
+        redirect_with_status($returnPath, 'error', 'storage_failed');
+    }
 }
 
 $csvPath = $logsDir . '/lead-requests.csv';
 $isNewFile = !file_exists($csvPath);
 $handle = fopen($csvPath, 'ab');
 
-if ($handle !== false) {
-    if ($isNewFile) {
-        fputcsv($handle, ['submitted_at', 'service', 'page_slug', 'name', 'phone', 'zip', 'issue', 'ip', 'user_agent']);
-    }
-
-    fputcsv($handle, [
-        date('c'),
-        $service,
-        $pageSlug,
-        $name,
-        $phone,
-        $zip,
-        $issue,
-        $_SERVER['REMOTE_ADDR'] ?? '',
-        $_SERVER['HTTP_USER_AGENT'] ?? '',
-    ]);
-    fclose($handle);
+if ($handle === false) {
+    redirect_with_status($returnPath, 'error', 'storage_failed');
 }
 
-header('Location: ' . $returnPath . '?lead=success');
+if ($isNewFile) {
+    if (fputcsv($handle, ['submitted_at', 'service', 'page_slug', 'name', 'phone', 'zip', 'issue', 'ip', 'user_agent']) === false) {
+        fclose($handle);
+        redirect_with_status($returnPath, 'error', 'storage_failed');
+    }
+}
+
+if (fputcsv($handle, [
+    date('c'),
+    $service,
+    $pageSlug,
+    $name,
+    $phone,
+    $zip,
+    $issue,
+    $_SERVER['REMOTE_ADDR'] ?? '',
+    $_SERVER['HTTP_USER_AGENT'] ?? '',
+]) === false) {
+    fclose($handle);
+    redirect_with_status($returnPath, 'error', 'storage_failed');
+}
+
+fclose($handle);
+
+redirect_with_status($returnPath, 'success');
 exit;

@@ -12,6 +12,24 @@
         return response.json();
     }
 
+    function showUnavailableState(result, input, button) {
+        if (input) {
+            input.disabled = true;
+            input.setAttribute('aria-disabled', 'true');
+        }
+
+        if (button) {
+            button.disabled = true;
+            button.setAttribute('aria-disabled', 'true');
+        }
+
+        if (result) {
+            result.textContent = 'We could not load the ZIP checker right now. Please call or email us and we will confirm service for you.';
+            result.classList.remove('hidden');
+            result.dataset.state = 'not-served';
+        }
+    }
+
     async function initServiceAreaChecker() {
         const input = document.querySelector('[data-service-zip-input]');
         const button = document.querySelector('[data-service-zip-button]');
@@ -23,9 +41,21 @@
 
         button.dataset.zipCheckerBound = 'loading';
 
+        const failSafe = (error) => {
+            console.error(error);
+            showUnavailableState(result, input, button);
+            delete button.dataset.zipCheckerBound;
+        };
+
         try {
             const serviceAreaData = await getServiceAreaData();
             const serviceZips = new Set(serviceAreaData.service_zips || []);
+
+            if (window.MANHATTAN_APPLIANCE_SERVICE_AREA_ERROR || serviceZips.size === 0) {
+                showUnavailableState(result, input, button);
+                delete button.dataset.zipCheckerBound;
+                return;
+            }
 
             const showResult = (message, isServed) => {
                 result.textContent = message;
@@ -59,8 +89,7 @@
 
             button.dataset.zipCheckerBound = 'true';
         } catch (error) {
-            delete button.dataset.zipCheckerBound;
-            throw error;
+            failSafe(error);
         }
     }
 

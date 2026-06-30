@@ -7,12 +7,31 @@ $page = [
     'description' => 'Schedule appliance repair service in Manhattan, NY and select New Jersey counties.',
 ];
 
+$leadStatus = $_GET['lead'] ?? '';
+$leadReason = $_GET['reason'] ?? '';
+$leadErrorMessages = [
+    'missing_contact' => 'Please include your name and phone number so we can get back to you.',
+    'invalid_zip' => 'Please double-check the ZIP code you entered and try again.',
+    'storage_failed' => 'We could not save your request just now. Please call or email us and we will help right away.',
+    'invalid_return' => 'We could not return you to the requested page. Please use the contact details below.',
+    'bad_method' => 'That link cannot send a request directly. Please use the form on the website.',
+];
+
 render_header($page, $site, $navItems);
 ?>
 <section class="px-4 py-16 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-4xl">
         <p class="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Contact</p>
         <h1 class="mb-5 text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">Schedule your appliance service.</h1>
+        <?php if ($leadStatus === 'error'): ?>
+            <div class="mb-5 rounded-2xl border border-rose-200 bg-rose-50 px-5 py-4 text-sm leading-6 text-rose-800">
+                <?= htmlspecialchars($leadErrorMessages[$leadReason] ?? 'We could not send your request just now. Please try again or call us directly.') ?>
+            </div>
+        <?php elseif ($leadStatus === 'success'): ?>
+            <div class="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm leading-6 text-emerald-800">
+                Thanks for reaching out. We will review your request and follow up as soon as possible.
+            </div>
+        <?php endif; ?>
         <p class="text-lg leading-8 text-slate-600">Contact us today to schedule professional appliance repair service and get your equipment back to peak performance.</p>
     </div>
 </section>

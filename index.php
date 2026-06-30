@@ -55,7 +55,7 @@ $featuredTestimonials = [
 
 render_header($page, $site, $navItems);
 ?>
-<section class="relative overflow-hidden bg-slate-900">
+<section class="hero-section relative overflow-hidden">
     <div class="hero-slideshow absolute inset-0" aria-hidden="true">
         <span class="hero-slide hero-slide-1"></span>
         <span class="hero-slide hero-slide-2"></span>

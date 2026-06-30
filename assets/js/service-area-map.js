@@ -2,6 +2,20 @@
     const manhattanZipPrefix = '10';
     let zipAreaNames = {};
 
+    function getStatusNode(mapNode) {
+        return mapNode?.parentElement?.querySelector('[data-service-area-map-status]') || null;
+    }
+
+    function showMapStatus(statusNode, message, tone = 'info') {
+        if (!statusNode) {
+            return;
+        }
+
+        statusNode.textContent = message;
+        statusNode.dataset.state = tone;
+        statusNode.classList.remove('hidden');
+    }
+
     async function getServiceAreaData() {
         if (window.MANHATTAN_APPLIANCE_SERVICE_AREA_DATA) {
             return window.MANHATTAN_APPLIANCE_SERVICE_AREA_DATA;
@@ -82,17 +96,32 @@
 
     async function initServiceAreaMap() {
         const mapNode = document.querySelector('[data-service-area-map]');
+        const statusNode = getStatusNode(mapNode);
 
         if (!mapNode || typeof window.L === 'undefined' || mapNode.dataset.mapBound === 'true' || mapNode.dataset.mapBound === 'loading') {
+            if (mapNode && typeof window.L === 'undefined') {
+                showMapStatus(statusNode, 'The interactive map could not load right now. The ZIP checker and area list below are still available, or call us and we will confirm coverage for you.', 'warning');
+            }
             return;
         }
 
         mapNode.dataset.mapBound = 'loading';
 
+        const failSafe = (error) => {
+            console.error(error);
+            delete mapNode.dataset.mapBound;
+            showMapStatus(statusNode, 'The interactive map is unavailable right now. Please use the ZIP checker below or call us and we will confirm your service area.', 'warning');
+        };
+
         try {
             const serviceAreaData = await getServiceAreaData();
             const serviceZips = new Set(serviceAreaData.service_zips || []);
             zipAreaNames = serviceAreaData.zip_area_names || {};
+
+            if (window.MANHATTAN_APPLIANCE_SERVICE_AREA_ERROR || serviceZips.size === 0) {
+                failSafe(window.MANHATTAN_APPLIANCE_SERVICE_AREA_ERROR || new Error('Service area data missing'));
+                return;
+            }
 
             const map = window.L.map(mapNode, {
                 scrollWheelZoom: true,
@@ -109,10 +138,20 @@
             window.L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
                 maxZoom: 18,
                 attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+            }).on('tileerror', () => {
+                showMapStatus(statusNode, 'The map tiles are taking longer than usual to load. The ZIP checker and area list are still available below.', 'warning');
             }).addTo(map);
 
             const response = await fetch('/assets/data/service-zips.geojson');
+            if (!response.ok) {
+                throw new Error(`Failed to load service ZIP map (${response.status})`);
+            }
+
             const geojson = await response.json();
+
+            if (!Array.isArray(geojson.features) || geojson.features.length === 0) {
+                throw new Error('Service ZIP map is empty');
+            }
 
             const manhattanFeatures = geojson.features.filter((feature) => {
                 const zip = feature?.properties?.ZCTA5CE10;
@@ -170,7 +209,7 @@
             );
 
             const manhattanLayer = makeLayer(manhattanFeatures).addTo(map);
-            const newJerseyLayer = makeLayer(newJerseyFeatures).addTo(map);
+            makeLayer(newJerseyFeatures).addTo(map);
 
             const manhattanBounds = manhattanLayer.getBounds();
             if (manhattanBounds.isValid()) {
@@ -180,10 +219,14 @@
             map.on('zoomend', () => updateZoomLabels(map, labeledLayers));
             updateZoomLabels(map, labeledLayers);
 
+            if (statusNode) {
+                statusNode.classList.add('hidden');
+                statusNode.textContent = '';
+            }
+
             mapNode.dataset.mapBound = 'true';
         } catch (error) {
-            delete mapNode.dataset.mapBound;
-            throw error;
+            failSafe(error);
         }
     }
 

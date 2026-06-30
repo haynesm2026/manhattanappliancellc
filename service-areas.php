@@ -55,6 +55,7 @@ render_header($page, $site, $navItems);
             <h2 class="text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Explore Our Service Map</h2>
             <p class="mx-auto mt-3 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">The map opens focused on Manhattan, then you can pan west to see our nearby New Jersey coverage points and regions.</p>
         </div>
+        <p class="mb-4 hidden rounded-2xl border border-brand-line bg-brand-soft px-4 py-3 text-sm leading-6 text-slate-700 shadow-panel" data-service-area-map-status></p>
         <div class="overflow-hidden rounded-[24px] border border-brand-line bg-white shadow-panel">
             <div class="h-[420px] w-full sm:h-[520px]" data-service-area-map></div>
         </div>
